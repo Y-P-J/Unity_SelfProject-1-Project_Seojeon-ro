@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Maintenance.unity
+    guid: 541aa0e8a175c1a4a97036ef12650ddc
+  - enabled: 1
+    path: Assets/Scenes/Battle.unity
+    guid: ab1b247a91ff4314f9e46da8ae73f9a7
   m_configObjects: {}

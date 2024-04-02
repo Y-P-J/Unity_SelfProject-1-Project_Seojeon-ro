@@ -13,4 +13,35 @@ https://www.dobong.or.kr/main/main.php?categoryid=05&menuid=04&groupid=00
 감탄로드돋움체 Bold (폰트) - 서술시에 사용되는 주요 사용 폰트
 https://www.taebaek.go.kr/www/contents.do?key=1872
 
+UI SFX Free Pack (에셋스토어)
+https://assetstore.unity.com/packages/audio/sound-fx/ui-sfx-free-pack-245925
+SharpUI GUI (에셋스토어)
+https://assetstore.unity.com/packages/2d/gui/sharpui-gui-195933
+Evil Wizard (에셋스토어)
+https://assetstore.unity.com/packages/2d/characters/evil-wizard-168007
+Hero Knight (에셋스토어)
+https://assetstore.unity.com/packages/2d/characters/hero-knight-167779
+Martial Hero (에셋스토어)
+https://assetstore.unity.com/packages/2d/characters/martial-hero-170422
+Medieval Warrior Pack 2 (에셋스토어)
+https://assetstore.unity.com/packages/2d/characters/medieval-warrior-pack-2-174788
+Monsters_Creatures_Fantasy (에셋스토어)
+https://assetstore.unity.com/packages/2d/characters/monsters-creatures-fantasy-167949
+Fantasy Inventory Icons [Free] (에셋스토어)
+https://assetstore.unity.com/packages/2d/gui/icons/fantasy-inventory-icons-free-143805
+RPG BGM - Lobby (에셋스토어)
+https://assetstore.unity.com/packages/audio/music/rpg-bgm-lobby-37105
+RPG BGM - Dungeon (에셋스토어)
+https://assetstore.unity.com/packages/audio/music/rpg-bgm-dungeon-37116
+RPG BGM - Kingdom (에셋스토어)
+https://assetstore.unity.com/packages/audio/music/rpg-bgm-kingdom-135990
+
+
+
+
+
+
+
+
+
 
