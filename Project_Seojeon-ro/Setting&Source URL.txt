@@ -35,8 +35,8 @@ RPG BGM - Dungeon (에셋스토어)
 https://assetstore.unity.com/packages/audio/music/rpg-bgm-dungeon-37116
 RPG BGM - Kingdom (에셋스토어)
 https://assetstore.unity.com/packages/audio/music/rpg-bgm-kingdom-135990
-
-
+2D SKILLS ICON SET - HANDPAINTED (에셋스토어)
+https://assetstore.unity.com/packages/2d/gui/icons/2d-skills-icon-set-handpainted-210622
 
 
 

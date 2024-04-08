@@ -25,10 +25,9 @@ namespace ItemStruct
     {
         HELMET = 1,
         CLOTH = 101,
-        PANTS = 201,
-        GLOVE = 301,
-        BOOTS = 401,
-        RING = 501,
+        GLOVE = 201,
+        BOOTS = 301,
+        RING = 401,
     }
 
     public enum QUALITY_TYPE
