@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Security;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public struct Status
     [Tooltip("방어력")]
     public int defense;
     [Tooltip("치명률")]
-    public int critical;
+    public float critical;
     [Tooltip("회피율")]
-    public int avoid;
+    public float avoid;
 }

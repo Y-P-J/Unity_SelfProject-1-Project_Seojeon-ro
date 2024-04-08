@@ -8,10 +8,12 @@ public static class LogHandler
     /// <summary>
     /// 로그를 출력하는 함수
     /// </summary>
-    /// <param name="_saveLog">외부에 기록할 시 true</param>
-    public static void WriteLog(string _message, bool _saveLog = false)
+    public static void WriteLog(string _message, bool _isError, bool _saveLog)
     {
-        Debug.Log(_message);
+        if (_isError)
+            Debug.LogError(_message);
+        else
+            Debug.Log(_message);
 
         if (_saveLog)
         {
@@ -19,7 +21,10 @@ public static class LogHandler
             string _logMessage = System.DateTime.Now + " / " + _message;
 
             //로그 파일에 기록
-            System.IO.File.AppendAllText("log.txt", _logMessage + "\n");
+            if(_isError)
+                System.IO.File.AppendAllText("errorLog.txt", _logMessage + "\n");
+            else
+                System.IO.File.AppendAllText("log.txt", _logMessage + "\n");
         }
     }
 }

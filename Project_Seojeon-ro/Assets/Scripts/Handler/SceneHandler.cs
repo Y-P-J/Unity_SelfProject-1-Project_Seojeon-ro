@@ -24,7 +24,7 @@ public static class SceneHandler
         //현재 씬 이름을 저장
         currentScene = SceneManager.GetActiveScene().name;
 
-        LogHandler.WriteLog("First LoadScene : " + currentScene, true);
+        LogHandler.WriteLog("First LoadScene : " + currentScene, false, true);
     }
 
     /// <summary>
@@ -37,6 +37,6 @@ public static class SceneHandler
 
         currentScene = _id;
 
-        LogHandler.WriteLog("LoadScene : " + currentScene, true);
+        LogHandler.WriteLog("LoadScene : " + currentScene, false, true);
     }
 }

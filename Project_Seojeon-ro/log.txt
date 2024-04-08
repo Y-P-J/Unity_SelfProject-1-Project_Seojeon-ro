@@ -23,3 +23,5 @@
 2024-04-06 오후 7:34:28 / LoadScene : Maintenance
 2024-04-06 오후 7:35:21 / First LoadScene : Maintenance
 2024-04-06 오후 7:35:21 / LoadScene : Battle
+2024-04-08 오후 8:54:21 / First LoadScene : Title
+2024-04-08 오후 8:54:21 / LoadScene : Maintenance
