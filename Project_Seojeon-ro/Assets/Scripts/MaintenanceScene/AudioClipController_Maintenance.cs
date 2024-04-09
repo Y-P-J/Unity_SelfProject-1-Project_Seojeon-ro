@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-//타이틀 씬에서 사용되는 AudioClip 컨트롤러 클래스
-public class AudioClipController_Title : MonoBehaviour
+//메인테넌스 씬에서 사용되는 AudioClip 컨트롤러 클래스
+public class AudioClipController_Maintenance : MonoBehaviour
 {
     [Header("BGM")]
-    [Tooltip("타이틀 배경음")]
-    [SerializeField] AudioClip titleBGMAudio;
+    [Tooltip("메인테넌스 배경음")]
+    [SerializeField] AudioClip maintenanceBGMAudio;
 
 
 
@@ -20,16 +20,16 @@ public class AudioClipController_Title : MonoBehaviour
 
     void Start()
     {
-        BGMControl(titleBGMAudio, true);
+        TitleBGMControl(true);
     }
 
     /// <summary>
     /// 배경음 컨트롤 함수
     /// </summary>
-    public void BGMControl(AudioClip _audio, bool _b)
+    public void TitleBGMControl(bool _b)
     {
         if (_b)
-            VolumeManager.Instance.BgmSource.PlayOneShot(_audio);
+            VolumeManager.Instance.BgmSource.PlayOneShot(maintenanceBGMAudio);
         else
             VolumeManager.Instance.BgmSource.Stop();
     }

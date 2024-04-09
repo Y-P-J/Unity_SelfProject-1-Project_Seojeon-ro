@@ -20,16 +20,31 @@ public static class IDGenerator
     }
 
     /// <summary>
-    /// 장비 ID를 생성하는 함수
+    /// 무기 ID를 생성하는 함수
     /// </summary>
-    public static string GenerateID(EquipInfo _equipInfo)
+    public static string GenerateID(WeaponInfo _info)
     {
         StringBuilder _ID = new StringBuilder();
 
-        _ID.Append("EQ");
-        _ID.Append(((int)_equipInfo.EquipType).ToString("D4"));
-        _ID.Append(((int)_equipInfo.Quilty).ToString("D2"));
-        _ID.Append(_equipInfo.Number.ToString("D4"));
+        _ID.Append("WP");
+        _ID.Append(((int)_info.WeaponType).ToString("D4"));
+        _ID.Append(((int)_info.Quilty).ToString("D2"));
+        _ID.Append(_info.Number.ToString("D4"));
+
+        return _ID.ToString();
+    }
+
+    /// <summary>
+    /// 방어구 ID를 생성하는 함수
+    /// </summary>
+    public static string GenerateID(WearInfo _info)
+    {
+        StringBuilder _ID = new StringBuilder();
+
+        _ID.Append("WE");
+        _ID.Append(((int)_info.WearType).ToString("D4"));
+        _ID.Append(((int)_info.Quilty).ToString("D2"));
+        _ID.Append(_info.Number.ToString("D4"));
 
         return _ID.ToString();
     }

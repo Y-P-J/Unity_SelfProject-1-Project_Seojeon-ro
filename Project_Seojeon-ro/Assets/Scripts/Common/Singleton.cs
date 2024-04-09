@@ -29,7 +29,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    void Awake()
+    protected void Awake()
     {
         //이미 인스턴스가 있다면 이 인스턴스를 파괴하고 다른 인스턴스를 생성하지 않는다.
         if (_instance != null && _instance != this)

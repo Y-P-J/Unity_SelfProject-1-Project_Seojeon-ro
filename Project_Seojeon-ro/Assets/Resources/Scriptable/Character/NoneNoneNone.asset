@@ -10,38 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 084323cffaef83147b74437d814b4966, type: 3}
-  m_Name: Weaponer
+  m_Name: NoneNoneNone
   m_EditorClassIdentifier: 
-  characterName: "\uBB34\uAE30\uBCD1"
-  number: 1
-  id: CH0001
-  level: 1
+  characterName: NoneNoneNone
+  number: 0
+  id: CH0000
+  level: 0
   originStatus:
-    hp: 1000
-    mp: 400
-    speed: 100
-    attack: 200
-    defense: 100
-    critical: 30
-    avoid: 10
+    hp: 0
+    mp: 0
+    speed: 0
+    attack: 0
+    defense: 0
+    critical: 0
+    avoid: 0
   currentStatus:
-    hp: 1000
-    mp: 400
-    speed: 100
-    attack: 200
-    defense: 100
-    critical: 30
-    avoid: 10
+    hp: 0
+    mp: 0
+    speed: 0
+    attack: 0
+    defense: 0
+    critical: 0
+    avoid: 0
   weapon: {fileID: 11400000, guid: 9d626678f85bfbf4baa23d8e02e56e53, type: 2}
-  weaponTypes: 0100000002000000
+  weaponTypes: 
   helmet: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
-  helmetTypes: 01000000
+  helmetTypes: 
   armor: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
-  armorTypes: 0b000000
+  armorTypes: 
   glove: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
-  gloveTypes: 15000000
+  gloveTypes: 
   shoes: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
-  shoesTypes: 1f000000
+  shoesTypes: 
   ring: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
-  ringTypes: 65000000
-  repImage: {fileID: 21300000, guid: 164f1080f33e94840a26df8bc796de1c, type: 3}
+  ringTypes: 
+  repImage: {fileID: 21300000, guid: 0c0fc7ef4df169f41a004789da65110c, type: 3}

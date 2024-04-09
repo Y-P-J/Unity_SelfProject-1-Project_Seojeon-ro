@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//캐릭터의 정보를 담는 스크립트에이블 오브젝트
+//캐릭터의 정보를 담는 ScriptableObject
 [CreateAssetMenu(fileName = "CharacterInfo", menuName = "PlayableObject/CharacterInfo")]
 public class CharacterInfo : ScriptableObject
 {
@@ -30,23 +30,23 @@ public class CharacterInfo : ScriptableObject
 
     //각 하단의 EQUIP_TYPE[] 배열은 해당 장비를 장착할 수 있는 타입을 표시함
     [Tooltip("현재 장착 무기")]
-    [SerializeField] protected EquipInfo weapon;
-    [SerializeField] EQUIP_TYPE[] weaponTypes;
+    [SerializeField] protected WeaponInfo weapon;
+    [SerializeField] WEAPON_TYPE[] weaponTypes;
     [Tooltip("현재 장착 헬멧")]
-    [SerializeField] protected EquipInfo helmet;
-    [SerializeField] EQUIP_TYPE[] helmetTypes;
+    [SerializeField] protected WearInfo helmet;
+    [SerializeField] WEAR_TYPE[] helmetTypes;
     [Tooltip("현재 장착 갑옷")]
-    [SerializeField] protected EquipInfo armor;
-    [SerializeField] EQUIP_TYPE[] armorTypes;
+    [SerializeField] protected WearInfo armor;
+    [SerializeField] WEAR_TYPE[] armorTypes;
     [Tooltip("현재 장착 장갑")]
-    [SerializeField] protected EquipInfo glove;
-    [SerializeField] EQUIP_TYPE[] gloveTypes;
+    [SerializeField] protected WearInfo glove;
+    [SerializeField] WEAR_TYPE[] gloveTypes;
     [Tooltip("현재 장착 신발")]
-    [SerializeField] protected EquipInfo shoes;
-    [SerializeField] EQUIP_TYPE[] shoesTypes;
+    [SerializeField] protected WearInfo shoes;
+    [SerializeField] WEAR_TYPE[] shoesTypes;
     [Tooltip("현재 장착 반지")]
-    [SerializeField] protected EquipInfo ring;
-    [SerializeField] EQUIP_TYPE[] ringTypes;
+    [SerializeField] protected WearInfo ring;
+    [SerializeField] WEAR_TYPE[] ringTypes;
 
     [Tooltip("캐릭터 대표 이미지")]
     [SerializeField] protected Sprite repImage;
@@ -59,17 +59,17 @@ public class CharacterInfo : ScriptableObject
     public Status OriginStatus => originStatus;
     public Status CurrentStatus => currentStatus;
     public EquipInfo Weapon => weapon;
-    public EQUIP_TYPE[] WeaponTypes => weaponTypes;
+    public WEAPON_TYPE[] WeaponTypes => weaponTypes;
     public EquipInfo Helmet => helmet;
-    public EQUIP_TYPE[] HelmetTypes => helmetTypes;
+    public WEAR_TYPE[] HelmetTypes => helmetTypes;
     public EquipInfo Armor => armor;
-    public EQUIP_TYPE[] ArmorTypes => armorTypes;
+    public WEAR_TYPE[] ArmorTypes => armorTypes;
     public EquipInfo Glove => glove;
-    public EQUIP_TYPE[] GloveTypes => gloveTypes;
+    public WEAR_TYPE[] GloveTypes => gloveTypes;
     public EquipInfo Shoes => shoes;
-    public EQUIP_TYPE[] ShoesTypes => shoesTypes;
+    public WEAR_TYPE[] ShoesTypes => shoesTypes;
     public EquipInfo Ring => ring;
-    public EQUIP_TYPE[] RingTypes => ringTypes;
+    public WEAR_TYPE[] RingTypes => ringTypes;
     public Sprite RepImage => repImage;
     #endregion
 
