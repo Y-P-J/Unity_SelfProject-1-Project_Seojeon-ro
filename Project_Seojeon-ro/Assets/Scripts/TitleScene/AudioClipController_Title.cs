@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 //타이틀 씬에서 사용되는 AudioClip 컨트롤러 클래스
-public class AudioClipController_Title : MonoBehaviour
+public class AudioClipController_Title : AudioClipController
 {
     [Header("BGM")]
     [Tooltip("타이틀 배경음")]
@@ -23,25 +23,6 @@ public class AudioClipController_Title : MonoBehaviour
         BGMControl(titleBGMAudio, true);
     }
 
-    /// <summary>
-    /// 배경음 컨트롤 함수
-    /// </summary>
-    public void BGMControl(AudioClip _audio, bool _b)
-    {
-        if (_b)
-            VolumeManager.Instance.BgmSource.PlayOneShot(_audio);
-        else
-            VolumeManager.Instance.BgmSource.Stop();
-    }
-
-    /// <summary>
-    /// UI버튼 컨트롤 함수
-    /// </summary>
-    public void UibuttonControl(bool _b)
-    {
-        if (_b)
-            VolumeManager.Instance.SeSource.PlayOneShot(uibuttonAudio);
-        else
-            VolumeManager.Instance.SeSource.Stop();
-    }
+    public void TitleBGMAudio(bool _b) => BGMControl(titleBGMAudio, _b);
+    public void UIButtonAudio(bool _b) => SEControl(uibuttonAudio, _b);
 }

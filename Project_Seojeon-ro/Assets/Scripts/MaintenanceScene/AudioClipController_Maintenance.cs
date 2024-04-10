@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 //메인테넌스 씬에서 사용되는 AudioClip 컨트롤러 클래스
-public class AudioClipController_Maintenance : MonoBehaviour
+public class AudioClipController_Maintenance : AudioClipController
 {
     [Header("BGM")]
     [Tooltip("메인테넌스 배경음")]
@@ -20,28 +20,9 @@ public class AudioClipController_Maintenance : MonoBehaviour
 
     void Start()
     {
-        TitleBGMControl(true);
+        BGMControl(maintenanceBGMAudio, true);
     }
 
-    /// <summary>
-    /// 배경음 컨트롤 함수
-    /// </summary>
-    public void TitleBGMControl(bool _b)
-    {
-        if (_b)
-            VolumeManager.Instance.BgmSource.PlayOneShot(maintenanceBGMAudio);
-        else
-            VolumeManager.Instance.BgmSource.Stop();
-    }
-
-    /// <summary>
-    /// UI버튼 컨트롤 함수
-    /// </summary>
-    public void UibuttonControl(bool _b)
-    {
-        if (_b)
-            VolumeManager.Instance.SeSource.PlayOneShot(uibuttonAudio);
-        else
-            VolumeManager.Instance.SeSource.Stop();
-    }
+    public void MaintenanceBGMAudio(bool _b) => BGMControl(maintenanceBGMAudio, _b);
+    public void UIButtonAudio(bool _b) => SEControl(uibuttonAudio, _b);
 }

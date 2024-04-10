@@ -9,6 +9,11 @@ using static SceneHandler;
 public class GameManager : Singleton<GameManager>
 {
     /// <summary>
+    /// 전체화면 설정 함수
+    /// </summary>
+    public void SetFullScreen(bool _b) => Screen.fullScreen = _b;
+
+    /// <summary>
     /// 게임종료 함수
     /// </summary>
     public void ExitGame()

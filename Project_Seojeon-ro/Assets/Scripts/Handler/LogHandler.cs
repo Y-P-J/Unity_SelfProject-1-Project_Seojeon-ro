@@ -8,23 +8,39 @@ public static class LogHandler
     /// <summary>
     /// 로그를 출력하는 함수
     /// </summary>
-    public static void WriteLog(string _message, bool _isError, bool _saveLog)
+    public static void WriteLog(string _message, string _className, LogType _logtype, bool _saveLog)
     {
-        if (_isError)
-            Debug.LogError(_message);
-        else
-            Debug.Log(_message);
+        switch (_logtype)
+        {
+            case LogType.Log:
+                Debug.Log(_message);
+                break;
+            case LogType.Warning:
+                Debug.LogWarning(_message);
+                break;
+            case LogType.Error:
+                Debug.LogError(_message);
+                break;
+            case LogType.Exception:
+                Debug.LogException(new System.Exception(_message));
+                break;
+            case LogType.Assert:
+                Debug.LogAssertion(_message);
+                break;
+        }
 
         if (_saveLog)
         {
-            //로그 메시지를 날짜와 함께 기록
-            string _logMessage = System.DateTime.Now + " / " + _message;
+            //저장할 로그 메시지를 정리하여 작성
+            string _logMessage = "[" + System.DateTime.Now + "]" + " " + _className + " / " + _logtype + " Error\n" + _message + "\n\n";
 
-            //로그 파일에 기록
-            if(_isError)
-                System.IO.File.AppendAllText("errorLog.txt", _logMessage + "\n");
-            else
-                System.IO.File.AppendAllText("log.txt", _logMessage + "\n");
+            string _directoryPath = "Logs/DeveloperLog";
+            if (!System.IO.Directory.Exists(_directoryPath))
+            {
+                System.IO.Directory.CreateDirectory(_directoryPath);
+            }
+
+            System.IO.File.AppendAllText(_directoryPath + "/Log.txt", _logMessage);
         }
     }
 }

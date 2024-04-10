@@ -48,4 +48,14 @@ public static class IDGenerator
 
         return _ID.ToString();
     }
+
+    public static string GenerateID(GameInitInfo _info)
+    {
+        StringBuilder _ID = new StringBuilder();
+
+        _ID.Append("GI");
+        _ID.Append(_info.Number.ToString("D4"));
+
+        return _ID.ToString();
+    }
 }
