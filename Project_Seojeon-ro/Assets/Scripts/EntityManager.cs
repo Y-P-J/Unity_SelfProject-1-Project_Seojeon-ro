@@ -165,6 +165,17 @@ public class EntityManager : Singleton<EntityManager>
                 }
             }
         }
+        else if (typeof(T) == typeof(GameInitInfo))
+        {
+            foreach (GameInitInfo _gi in gameInitList)
+            {
+                if (_gi.ID == _id)
+                {
+                    T _copyEntity = Instantiate(_gi) as T;
+                    return _copyEntity;
+                }
+            }
+        }
 
         LogHandler.WriteLog("ID가 " + _id + "인 " + typeof(T).ToString() + "를 찾을 수 없습니다. 또는, " +
             typeof(T).ToString() + "형태는 검색이 불가능합니다.", this.GetType().Name, LogType.Error, true);

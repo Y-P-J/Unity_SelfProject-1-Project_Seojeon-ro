@@ -8,6 +8,11 @@ public class CharacterGroupController : MonoBehaviour
     [Tooltip("캐릭터 정보 리스트")]
     [SerializeField, ReadOnly] protected CharacterInfo[] characterGroup;
 
+
+    #region 람다식 프로퍼티
+    public CharacterInfo[] CharacterGroup => characterGroup;
+    #endregion
+
     /// <summary>
     /// 현재 3 vs 3 기반의 게임이기에 3개만 받아서 설정하며, 확장성은 고려하지 않음
     /// </summary>

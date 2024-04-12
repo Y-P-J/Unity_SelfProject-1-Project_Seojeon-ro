@@ -10,8 +10,6 @@ public static class SceneHandler
     [Tooltip("현재 씬 이름")]
     static string currentScene;
 
-
-
     #region 람다식 프로퍼티
     public static string CurrentScene => currentScene;
     #endregion
@@ -39,4 +37,11 @@ public static class SceneHandler
 
         LogHandler.WriteLog("LoadScene : " + _id, typeof(SceneHandler).Name, LogType.Log, true);
     }
+
+    /// <summary>
+    /// SceneHandler 초기화를 위한 더미 함수
+    /// </summary>
+    [RuntimeInitializeOnLoadMethod]
+    static void Initialize() { }
+
 }

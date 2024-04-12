@@ -13,6 +13,12 @@ public class GameProgressManager : Singleton<GameProgressManager>
     [Tooltip("적 캐릭터 그룹")]
     [SerializeField] CharacterGroupController enemyCharacter;
 
+    #region 람다식 프로퍼티
+    public int CurrentStage => currentStage;
+    public CharacterGroupController PlayerCharacter => playerCharacter;
+    public CharacterGroupController EnemyCharacter => enemyCharacter;
+    #endregion
+
     public void Setup(string _id)
     {
         GameInitInfo _info = EntityManager.Instance.CopyEntityByID<GameInitInfo>(_id);
