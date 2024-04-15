@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameInitInfoName: OnlySorcerer
   number: 4
-  id: GI0000
+  id: GI0004
   currentStage: 1
   playerChara1_ID: CH0003
   playerChara2_ID: CH0003
   playerChara3_ID: CH0003
-  enemyChara1_ID: CH0004
-  enemyChara2_ID: CH0004
-  enemyChara3_ID: CH0004
+  enemyChara1_ID: CH1001
+  enemyChara2_ID: CH1001
+  enemyChara3_ID: CH1001

@@ -19,6 +19,10 @@ public class GameProgressManager : Singleton<GameProgressManager>
     public CharacterGroupController EnemyCharacter => enemyCharacter;
     #endregion
 
+    /// <summary>
+    /// GameInitInfo를 통해, 또는 그 외의 경로로 게임을 초기화하는 함수
+    /// </summary>
+    /// <param name="_id"></param>
     public void Setup(string _id)
     {
         GameInitInfo _info = EntityManager.Instance.CopyEntityByID<GameInitInfo>(_id);
@@ -27,6 +31,6 @@ public class GameProgressManager : Singleton<GameProgressManager>
 
         playerCharacter.Setup(_info.PlayerChara1_ID, _info.PlayerChara2_ID, _info.PlayerChara3_ID);
 
-        //enemyCharacter.Setup(_info.enemyChara1, _info.enemyChara2, _info.enemyChara3);
+        enemyCharacter.Setup(_info.EnemyChara1_ID, _info.EnemyChara2_ID, _info.EnemyChara3_ID);
     }
 }

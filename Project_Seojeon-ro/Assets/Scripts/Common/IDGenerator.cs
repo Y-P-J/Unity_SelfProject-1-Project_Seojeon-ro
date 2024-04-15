@@ -49,11 +49,24 @@ public static class IDGenerator
         return _ID.ToString();
     }
 
+    /// <summary>
+    /// 게임 초기화 정보 ID를 생성하는 함수
+    /// </summary>
     public static string GenerateID(GameInitInfo _info)
     {
         StringBuilder _ID = new StringBuilder();
 
         _ID.Append("GI");
+        _ID.Append(_info.Number.ToString("D4"));
+
+        return _ID.ToString();
+    }
+
+    public static string GenerateID(SkillInfo _info)
+    {
+        StringBuilder _ID = new StringBuilder();
+
+        _ID.Append("SK");
         _ID.Append(_info.Number.ToString("D4"));
 
         return _ID.ToString();

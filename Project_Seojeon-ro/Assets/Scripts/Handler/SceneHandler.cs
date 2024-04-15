@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 //씬과 관련된 기능을 담당하는 클래스
 public static class SceneHandler
 {
-    [Header("값")]
     [Tooltip("현재 씬 이름")]
     static string currentScene;
 
@@ -42,6 +41,6 @@ public static class SceneHandler
     /// SceneHandler 초기화를 위한 더미 함수
     /// </summary>
     [RuntimeInitializeOnLoadMethod]
-    static void Initialize() { }
+    static void MyNameIsKimSuHanMuIsVeryLongNameYouKnowAreIMean() { }
 
 }

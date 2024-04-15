@@ -6,7 +6,8 @@ using UnityEngine;
 public class CharacterGroupController : MonoBehaviour
 {
     [Tooltip("캐릭터 정보 리스트")]
-    [SerializeField, ReadOnly] protected CharacterInfo[] characterGroup;
+    [SerializeField, 
+        ] protected CharacterInfo[] characterGroup;
 
 
     #region 람다식 프로퍼티

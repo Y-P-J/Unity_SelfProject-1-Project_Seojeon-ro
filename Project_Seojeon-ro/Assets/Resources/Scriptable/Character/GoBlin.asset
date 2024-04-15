@@ -10,48 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 084323cffaef83147b74437d814b4966, type: 3}
-  m_Name: Knight
+  m_Name: GoBlin
   m_EditorClassIdentifier: 
-  characterName: "\uAE30\uC0AC"
-  number: 2
-  id: CH0002
+  characterName: "\uACE0\uBE14\uB9B0"
+  number: 1001
+  id: CH0001
   level: 1
   originStatus:
-    hp: 1300
+    hp: 500
     mp: 200
-    speed: 80
-    attack: 180
-    defense: 130
+    speed: 90
+    attack: 150
+    defense: 50
     critical: 20
-    avoid: 10
+    avoid: 20
   levelUpStatus:
     hp: 50
-    mp: 30
-    speed: 4
-    attack: 10
-    defense: 6
+    mp: 20
+    speed: 5
+    attack: 9
+    defense: 5
     critical: 2
-    avoid: 1
+    avoid: 3
   finalStatus:
-    hp: 1400
-    mp: 200
-    speed: 80
-    attack: 180
-    defense: 130
+    hp: 500
+    mp: 300
+    speed: 70
+    attack: 150
+    defense: 50
     critical: 20
-    avoid: 10
+    avoid: 20
   currentHp: 0
   currentMp: 0
   weapon: {fileID: 11400000, guid: 9d626678f85bfbf4baa23d8e02e56e53, type: 2}
-  weaponTypes: 01000000
+  weaponTypes: 
   helmet: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
-  helmetTypes: 01000000
+  helmetTypes: 
   armor: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
-  armorTypes: 0b000000
+  armorTypes: 
   gloves: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
-  gloveTypes: 15000000
+  gloveTypes: 
   shoes: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
-  shoesTypes: 1f000000
+  shoesTypes: 
   ring: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
-  ringTypes: 65000000
-  repImage: {fileID: 21300000, guid: e6625ca39f92882489473bb57b774c5d, type: 3}
+  ringTypes: 
+  repImage: {fileID: 21300000, guid: d11d2404079cec34a90196ceb5e83afb, type: 3}

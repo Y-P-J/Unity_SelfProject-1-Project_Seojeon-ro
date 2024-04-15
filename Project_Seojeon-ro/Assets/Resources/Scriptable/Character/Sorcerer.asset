@@ -21,10 +21,18 @@ MonoBehaviour:
     mp: 600
     speed: 70
     attack: 350
-    defense: 70
+    defense: 60
     critical: 20
     avoid: 0
-  currentStatus:
+  levelUpStatus:
+    hp: 30
+    mp: 40
+    speed: 3
+    attack: 12
+    defense: 4
+    critical: 3
+    avoid: 0
+  finalStatus:
     hp: 800
     mp: 600
     speed: 70
@@ -32,13 +40,15 @@ MonoBehaviour:
     defense: 70
     critical: 20
     avoid: 0
+  currentHp: 0
+  currentMp: 0
   weapon: {fileID: 11400000, guid: 9d626678f85bfbf4baa23d8e02e56e53, type: 2}
   weaponTypes: 15000000
   helmet: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   helmetTypes: 01000000
   armor: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   armorTypes: 0b000000
-  glove: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
+  gloves: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   gloveTypes: 15000000
   shoes: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   shoesTypes: 1f000000

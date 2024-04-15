@@ -38,7 +38,7 @@ MonoBehaviour:
   helmetTypes: 
   armor: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   armorTypes: 
-  glove: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
+  gloves: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   gloveTypes: 
   shoes: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   shoesTypes: 

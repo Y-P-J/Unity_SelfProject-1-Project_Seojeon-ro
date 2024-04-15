@@ -18,27 +18,45 @@ MonoBehaviour:
   level: 1
   originStatus:
     hp: 1000
-    mp: 400
+    mp: 300
     speed: 100
     attack: 200
     defense: 100
-    critical: 30
-    avoid: 10
-  currentStatus:
+    critical: 20
+    avoid: 20
+  levelUpStatus:
+    hp: 50
+    mp: 30
+    speed: 5
+    attack: 10
+    defense: 5
+    critical: 2
+    avoid: 1
+  levelModifiedStatus:
     hp: 1000
-    mp: 400
+    mp: 300
     speed: 100
     attack: 200
     defense: 100
-    critical: 30
-    avoid: 10
+    critical: 20
+    avoid: 20
+  finalStatus:
+    hp: 1000
+    mp: 300
+    speed: 100
+    attack: 200
+    defense: 100
+    critical: 20
+    avoid: 20
+  currentHp: 1000
+  currentMp: 300
   weapon: {fileID: 11400000, guid: 9d626678f85bfbf4baa23d8e02e56e53, type: 2}
   weaponTypes: 0100000002000000
   helmet: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   helmetTypes: 01000000
   armor: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   armorTypes: 0b000000
-  glove: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
+  gloves: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   gloveTypes: 15000000
   shoes: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
   shoesTypes: 1f000000

@@ -16,8 +16,8 @@ public enum QUILTY
     LEGENDARY = 41,     //레전더리
 }
 
-//장비의 정보를 담는 ScriptableObject
-public class EquipInfo : ScriptableObject
+//장비의 정보를 담는 ScriptableObject(단일로 사용되지 않으며, 상속받아 사용된다)
+public abstract class EquipInfo : ScriptableObject
 {
     [Tooltip("장비 이름")]
     [SerializeField] protected string equipName;

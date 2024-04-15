@@ -16,6 +16,8 @@ public class EntityManager : Singleton<EntityManager>
     [SerializeField, ReadOnly] protected List<WeaponInfo> weaponList;
     [Tooltip("방어구 정보 리스트")]
     [SerializeField, ReadOnly] protected List<WearInfo> wearList;
+    [Tooltip("스킬 정보 리스트")]
+    [SerializeField, ReadOnly] protected List<SkillInfo> skillList;
 
     [Tooltip("게임 시작 정보 리스트")]
     [SerializeField, ReadOnly] protected List<GameInitInfo> gameInitList;
@@ -27,11 +29,15 @@ public class EntityManager : Singleton<EntityManager>
         characterList = new List<CharacterInfo>();
         weaponList = new List<WeaponInfo>();
         wearList = new List<WearInfo>();
+        skillList = new List<SkillInfo>();
+
         gameInitList = new List<GameInitInfo>();
 
         LoadCharacterData();
         LoadWeaponData();
         LoadWearData();
+        LoadSkillData();
+
         LoadGameInitInfoData();
     }
 
@@ -102,6 +108,26 @@ public class EntityManager : Singleton<EntityManager>
         }
         else
             LogHandler.WriteLog("wearList가 null입니다. 로드할 수 없습니다.", this.GetType().Name, LogType.Error, true);
+    }
+
+    void LoadSkillData()
+    {
+        SkillInfo[] _skillInfo = Resources.LoadAll<SkillInfo>("Scriptable/Skill/");
+
+        if (_skillInfo.Length > 0)
+        {
+            skillList.AddRange(_skillInfo);
+
+            skillList = skillList.OrderBy(_sk => _sk.ID).ToList(); // ID를 기준으로 정렬
+
+            for (int i = 0; i < skillList.Count - 1; i++)
+            {
+                if (skillList[i].ID == skillList[i + 1].ID)
+                    LogHandler.WriteLog(skillList[i].SkillName + "와 " + skillList[i + 1].SkillName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+            }
+        }
+        else
+            LogHandler.WriteLog("skillList가 null입니다. 로드할 수 없습니다.", this.GetType().Name, LogType.Error, true);
     }
 
     /// <summary>

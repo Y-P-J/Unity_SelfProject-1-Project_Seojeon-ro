@@ -15,11 +15,11 @@ public static class LogHandler
             case LogType.Log:
                 Debug.Log(_message);
                 break;
-            case LogType.Warning:
-                Debug.LogWarning(_message);
-                break;
             case LogType.Error:
                 Debug.LogError(_message);
+                break;
+            case LogType.Warning:
+                Debug.LogWarning(_message);
                 break;
             case LogType.Exception:
                 Debug.LogException(new System.Exception(_message));
