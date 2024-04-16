@@ -9,8 +9,8 @@ public class CharacterInfo : ScriptableObject
 {
     [Tooltip("캐릭터 이름")]
     [SerializeField] protected string characterName;
-    [Tooltip("캐릭터 고유 숫자")]//기본적으로 피아구분없이 사용하기 위해 같은 ScriptableObject를 사용하나
-    [SerializeField] protected int number;//주로 적으로 사용되는 캐릭터는 1001 이상의 숫자를 사용하길 권장
+    [Tooltip("캐릭터 고유 숫자 / 기본적으로 피아구분없이 사용하기 위해 같은 ScriptableObject를 사용하나 주로 적으로 사용되는 캐릭터는 1001 이상의 숫자를 사용하길 권장")]
+    [SerializeField] protected int number;
     [Tooltip("캐릭터 ID(캐릭터 ID는 캐릭터 고유 숫자와 그 외의 정보를 토대로 IDGenerator에서 생성되어 지급받는다)")]
     [SerializeField, ReadOnly] protected string id;
 
@@ -27,7 +27,7 @@ public class CharacterInfo : ScriptableObject
     [SerializeField] protected Status levelUpStatus;
     [Tooltip("레벨 내용이 적용된 스테이터스")]
     [SerializeField, ReadOnly] protected Status levelModifiedStatus;
-    [Tooltip("캐릭터 현재 스테이터스")]//캐릭터의 최종 스테이터스는 레벨, 장비 장착, 버프/디버프에 따라 변동됨
+    [Tooltip("캐릭터 현재 스테이터스 / 캐릭터의 최종 스테이터스는 레벨, 장비 장착, 버프/디버프에 따라 변동됨")]
     [SerializeField, ReadOnly] protected Status finalStatus;
     [Tooltip("캐릭터 현재 HP")]//하단의 hp, mp는 전투중인 캐릭터의 현재 HP, MP를 나타냄
     [SerializeField, ReadOnly] protected int currentHp;
@@ -88,7 +88,7 @@ public class CharacterInfo : ScriptableObject
     void OnEnable()
     {
         id = IDGenerator.GenerateID(this);
-        
+
         levelModifiedStatus = originStatus + levelUpStatus * (level - 1);
 
         finalStatus = levelModifiedStatus + weapon.Status + helmet.Status + armor.Status + gloves.Status + shoes.Status + ring.Status;

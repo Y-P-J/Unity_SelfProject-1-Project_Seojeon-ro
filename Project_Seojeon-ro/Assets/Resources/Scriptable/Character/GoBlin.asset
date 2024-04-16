@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: "\uACE0\uBE14\uB9B0"
   number: 1001
-  id: CH0001
+  id: CH1001
   level: 1
   originStatus:
     hp: 500
@@ -32,16 +32,24 @@ MonoBehaviour:
     defense: 5
     critical: 2
     avoid: 3
-  finalStatus:
+  levelModifiedStatus:
     hp: 500
-    mp: 300
-    speed: 70
+    mp: 200
+    speed: 90
     attack: 150
     defense: 50
     critical: 20
     avoid: 20
-  currentHp: 0
-  currentMp: 0
+  finalStatus:
+    hp: 500
+    mp: 200
+    speed: 90
+    attack: 150
+    defense: 50
+    critical: 20
+    avoid: 20
+  currentHp: 500
+  currentMp: 200
   weapon: {fileID: 11400000, guid: 9d626678f85bfbf4baa23d8e02e56e53, type: 2}
   weaponTypes: 
   helmet: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}

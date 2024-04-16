@@ -1559,10 +1559,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de2d8541176b434c90760352fce7c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterList: []
-  weaponList: []
-  wearList: []
-  gameInitList: []
+  characterDict:
+    _serializedList: []
+  weaponDict:
+    _serializedList: []
+  wearDict:
+    _serializedList: []
+  skillDict:
+    _serializedList: []
+  gameInitDict:
+    _serializedList: []
 --- !u!4 &545970187
 Transform:
   m_ObjectHideFlags: 0
@@ -3762,6 +3768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2f3ca0026a8754d97c8a69f1880361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStage: -1
   playerCharacter: {fileID: 437727224}
   enemyCharacter: {fileID: 1314879791}
 --- !u!1 &1553965398

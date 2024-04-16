@@ -1,8 +1,9 @@
 using UnityEditor;
 using UnityEngine;
 
-//중복되는 Number를 가진 ScriptableObject를 검사하는 에디터들
+//유니티 에디터에서 중복되는 Number를 가진 ScriptableObject를 검사하는 에디터들
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(CharacterInfo))]
 public class CharacterInfoEditor : Editor
 {
@@ -10,13 +11,13 @@ public class CharacterInfoEditor : Editor
     {
         base.OnInspectorGUI();
 
-        if (target is CharacterInfo characterInfo)
+        if (target is CharacterInfo _characterInfo)
         {
-            CharacterInfo[] allCharacterInfos = Resources.FindObjectsOfTypeAll<CharacterInfo>();
+            CharacterInfo[] _allCharacterInfos = Resources.FindObjectsOfTypeAll<CharacterInfo>();
 
-            foreach (CharacterInfo info in allCharacterInfos)
+            foreach (CharacterInfo _info in _allCharacterInfos)
             {
-                if (info != characterInfo && info.Number == characterInfo.Number)
+                if (_info != _characterInfo && _info.Number == _characterInfo.Number)
                 {
                     EditorGUILayout.HelpBox("동일한 Number를 사용한 CharacterInfo에셋이 있습니다!", MessageType.Warning);
                     break;
@@ -33,15 +34,16 @@ public class WeaponInfoEditor : Editor
     {
         base.OnInspectorGUI();
 
-        if (target is WeaponInfo weaponInfo)
+        if (target is WeaponInfo _weaponInfo)
         {
-            WeaponInfo[] allWeaponInfos = Resources.FindObjectsOfTypeAll<WeaponInfo>();
+            WeaponInfo[] _allWeaponInfos = Resources.FindObjectsOfTypeAll<WeaponInfo>();
 
-            foreach (WeaponInfo info in allWeaponInfos)
+            foreach (WeaponInfo _info in _allWeaponInfos)
             {
-                if (info != weaponInfo && info.Number == weaponInfo.Number)
+                if (_info != _weaponInfo && _info.Number == _weaponInfo.Number)
                 {
                     EditorGUILayout.HelpBox("동일한 Number를 사용한 WeaponInfo에셋이 있습니다!", MessageType.Warning);
+                    Debug.LogError("동일한 Number를 사용한 WeaponInfo에셋이 있습니다!");
                     break;
                 }
             }
@@ -56,15 +58,16 @@ public class WearInfoEditor : Editor
     {
         base.OnInspectorGUI();
 
-        if (target is WearInfo wearInfo)
+        if (target is WearInfo _wearInfo)
         {
-            WearInfo[] allWearInfos = Resources.FindObjectsOfTypeAll<WearInfo>();
+            WearInfo[] _allWearInfos = Resources.FindObjectsOfTypeAll<WearInfo>();
 
-            foreach (WearInfo info in allWearInfos)
+            foreach (WearInfo _info in _allWearInfos)
             {
-                if (info != wearInfo && info.Number == wearInfo.Number)
+                if (_info != _wearInfo && _info.Number == _wearInfo.Number)
                 {
                     EditorGUILayout.HelpBox("동일한 Number를 사용한 WearInfo에셋이 있습니다!", MessageType.Warning);
+                    Debug.LogError("동일한 Number를 사용한 WearInfo에셋이 있습니다!");
                     break;
                 }
             }
@@ -72,6 +75,29 @@ public class WearInfoEditor : Editor
     }
 }
 
+[CustomEditor(typeof(SkillInfo))]
+public class SkillInfoEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        if (target is SkillInfo _skillInfo)
+        {
+            SkillInfo[] _allSkillInfos = Resources.FindObjectsOfTypeAll<SkillInfo>();
+
+            foreach (SkillInfo _info in _allSkillInfos)
+            {
+                if (_info != _skillInfo && _info.Number == _skillInfo.Number)
+                {
+                    EditorGUILayout.HelpBox("동일한 Number를 사용한 SkillInfo에셋이 있습니다!", MessageType.Warning);
+                    Debug.LogError("동일한 Number를 사용한 SkillInfo에셋이 있습니다!");
+                    break;
+                }
+            }
+        }
+    }
+}
 
 [CustomEditor(typeof(GameInitInfo))]
 public class GameInitInfoEditor : Editor
@@ -80,18 +106,20 @@ public class GameInitInfoEditor : Editor
     {
         base.OnInspectorGUI();
 
-        if (target is GameInitInfo gameInitInfo)
+        if (target is GameInitInfo _gameInitInfo)
         {
-            GameInitInfo[] allGameInitInfos = Resources.FindObjectsOfTypeAll<GameInitInfo>();
+            GameInitInfo[] _allGameInitInfos = Resources.FindObjectsOfTypeAll<GameInitInfo>();
 
-            foreach (GameInitInfo info in allGameInitInfos)
+            foreach (GameInitInfo _info in _allGameInitInfos)
             {
-                if (info != gameInitInfo && info.Number == gameInitInfo.Number)
+                if (_info != _gameInitInfo && _info.Number == _gameInitInfo.Number)
                 {
                     EditorGUILayout.HelpBox("동일한 Number를 사용한 GameInitInfo에셋이 있습니다!", MessageType.Warning);
+                    Debug.LogError("동일한 Number를 사용한 GameInitInfo에셋이 있습니다!");
                     break;
                 }
             }
         }
     }
 }
+#endif

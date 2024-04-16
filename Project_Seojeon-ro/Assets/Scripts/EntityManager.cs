@@ -1,3 +1,4 @@
+using AYellowpaper.SerializedCollections;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,28 +11,28 @@ using UnityEngine.TextCore.Text;
 //캐릭터와 장비의 정보를 담는 ScriptableObject를 로드하고 관리하는 클래스
 public class EntityManager : Singleton<EntityManager>
 {
-    [Tooltip("캐릭터 정보 리스트")]
-    [SerializeField, ReadOnly] protected List<CharacterInfo> characterList;
-    [Tooltip("무기 정보 리스트")]
-    [SerializeField, ReadOnly] protected List<WeaponInfo> weaponList;
-    [Tooltip("방어구 정보 리스트")]
-    [SerializeField, ReadOnly] protected List<WearInfo> wearList;
-    [Tooltip("스킬 정보 리스트")]
-    [SerializeField, ReadOnly] protected List<SkillInfo> skillList;
+    [Tooltip("캐릭터 정보 딕셔너리")]
+    [SerializeField, ReadOnly] protected SerializedDictionary<string, CharacterInfo> characterDict;
+    [Tooltip("무기 정보 딕셔너리")]
+    [SerializeField, ReadOnly] protected SerializedDictionary<string, WeaponInfo> weaponDict;
+    [Tooltip("방어구 정보 딕셔너리")]
+    [SerializeField, ReadOnly] protected SerializedDictionary<string, WearInfo> wearDict;
+    [Tooltip("스킬 정보 딕셔너리")]
+    [SerializeField, ReadOnly] protected SerializedDictionary<string, SkillInfo> skillDict;
 
-    [Tooltip("게임 시작 정보 리스트")]
-    [SerializeField, ReadOnly] protected List<GameInitInfo> gameInitList;
+    [Tooltip("게임 시작 정보 딕셔너리")]
+    [SerializeField, ReadOnly] protected SerializedDictionary<string, GameInitInfo> gameInitDict;
 
     new void Awake()
     {
         base.Awake();
 
-        characterList = new List<CharacterInfo>();
-        weaponList = new List<WeaponInfo>();
-        wearList = new List<WearInfo>();
-        skillList = new List<SkillInfo>();
+        characterDict = new SerializedDictionary<string, CharacterInfo>();
+        weaponDict = new SerializedDictionary<string, WeaponInfo>();
+        wearDict = new SerializedDictionary<string, WearInfo>();
+        skillDict = new SerializedDictionary<string, SkillInfo>();
 
-        gameInitList = new List<GameInitInfo>();
+        gameInitDict = new SerializedDictionary<string, GameInitInfo>();
 
         LoadCharacterData();
         LoadWeaponData();
@@ -50,18 +51,22 @@ public class EntityManager : Singleton<EntityManager>
 
         if (_characterInfo.Length > 0)
         {
-            characterList.AddRange(_characterInfo);
-
-            characterList = characterList.OrderBy(_ch => _ch.ID).ToList(); // ID를 기준으로 정렬
-
-            for (int i = 0; i < characterList.Count - 1; i++)
+            foreach (CharacterInfo _chara in _characterInfo)
             {
-                if (characterList[i].ID == characterList[i + 1].ID)
-                    LogHandler.WriteLog(characterList[i].CharacterName + "와 " + characterList[i + 1].CharacterName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+                if (characterDict.ContainsKey(_chara.ID))
+                {
+                    LogHandler.WriteLog(_chara.CharacterName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+                }
+                else
+                {
+                    characterDict.Add(_chara.ID, _chara);
+                }
             }
         }
         else
+        {
             LogHandler.WriteLog("characterInfo가 null입니다. 로드할 수 없습니다.", this.GetType().Name, LogType.Error, true);
+        }
     }
 
     /// <summary>
@@ -69,22 +74,26 @@ public class EntityManager : Singleton<EntityManager>
     /// </summary>
     void LoadWeaponData()
     {
-        EquipInfo[] _weaponInfo = Resources.LoadAll<WeaponInfo>("Scriptable/Equip/Weapon/");
+        WeaponInfo[] _weaponInfo = Resources.LoadAll<WeaponInfo>("Scriptable/Equip/Weapon/");
 
         if (_weaponInfo.Length > 0)
         {
-            weaponList.AddRange(_weaponInfo);
-
-            weaponList = weaponList.OrderBy(_eq => _eq.ID).ToList(); // ID를 기준으로 정렬
-
-            for (int i = 0; i < weaponList.Count - 1; i++)
+            foreach (WeaponInfo _weapon in _weaponInfo)
             {
-                if (weaponList[i].ID == weaponList[i + 1].ID)
-                    LogHandler.WriteLog(weaponList[i].EquipName + "와 " + weaponList[i + 1].EquipName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+                if (weaponDict.ContainsKey(_weapon.ID))
+                {
+                    LogHandler.WriteLog(_weapon.EquipName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+                }
+                else
+                {
+                    weaponDict.Add(_weapon.ID, _weapon);
+                }
             }
         }
         else
+        {
             LogHandler.WriteLog("weaponInfo가 null입니다. 로드할 수 없습니다.", this.GetType().Name, LogType.Error, true);
+        }
     }
 
     /// <summary>
@@ -92,42 +101,53 @@ public class EntityManager : Singleton<EntityManager>
     /// </summary>
     void LoadWearData()
     {
-        EquipInfo[] _wearInfo = Resources.LoadAll<WearInfo>("Scriptable/Equip/Wear/");
+        WearInfo[] _wearInfo = Resources.LoadAll<WearInfo>("Scriptable/Equip/Wear/");
 
         if (_wearInfo.Length > 0)
         {
-            wearList.AddRange(_wearInfo);
-
-            wearList = wearList.OrderBy(_eq => _eq.ID).ToList(); // ID를 기준으로 정렬
-
-            for (int i = 0; i < wearList.Count - 1; i++)
+            foreach (WearInfo _wear in _wearInfo)
             {
-                if (wearList[i].ID == wearList[i + 1].ID)
-                    LogHandler.WriteLog(wearList[i].EquipName + "와 " + wearList[i + 1].EquipName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+                if (wearDict.ContainsKey(_wear.ID))
+                {
+                    LogHandler.WriteLog(_wear.EquipName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+                }
+                else
+                {
+                    wearDict.Add(_wear.ID, _wear);
+                }
             }
         }
         else
+        {
             LogHandler.WriteLog("wearList가 null입니다. 로드할 수 없습니다.", this.GetType().Name, LogType.Error, true);
+        }
     }
 
+    /// <summary>
+    /// 스킬 정보를 로드하는 함수
+    /// </summary>
     void LoadSkillData()
     {
         SkillInfo[] _skillInfo = Resources.LoadAll<SkillInfo>("Scriptable/Skill/");
 
         if (_skillInfo.Length > 0)
         {
-            skillList.AddRange(_skillInfo);
-
-            skillList = skillList.OrderBy(_sk => _sk.ID).ToList(); // ID를 기준으로 정렬
-
-            for (int i = 0; i < skillList.Count - 1; i++)
+            foreach (SkillInfo _skill in _skillInfo)
             {
-                if (skillList[i].ID == skillList[i + 1].ID)
-                    LogHandler.WriteLog(skillList[i].SkillName + "와 " + skillList[i + 1].SkillName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+                if (skillDict.ContainsKey(_skill.ID))
+                {
+                    LogHandler.WriteLog(_skill.SkillName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+                }
+                else
+                {
+                    skillDict.Add(_skill.ID, _skill);
+                }
             }
         }
         else
+        {
             LogHandler.WriteLog("skillList가 null입니다. 로드할 수 없습니다.", this.GetType().Name, LogType.Error, true);
+        }
     }
 
     /// <summary>
@@ -139,18 +159,22 @@ public class EntityManager : Singleton<EntityManager>
 
         if (_gameInitInfo.Length > 0)
         {
-            gameInitList.AddRange(_gameInitInfo);
-
-            gameInitList = gameInitList.OrderBy(_gi => _gi.ID).ToList(); // ID를 기준으로 정렬
-
-            for (int i = 0; i < gameInitList.Count - 1; i++)
+            foreach (GameInitInfo _gameInit in _gameInitInfo)
             {
-                if (gameInitList[i].ID == gameInitList[i + 1].ID)
-                    LogHandler.WriteLog(gameInitList[i].GameInitInfoName + "와 " + gameInitList[i + 1].GameInitInfoName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+                if (gameInitDict.ContainsKey(_gameInit.ID))
+                {
+                    LogHandler.WriteLog(_gameInit.GameInitInfoName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
+                }
+                else
+                {
+                    gameInitDict.Add(_gameInit.ID, _gameInit);
+                }
             }
         }
         else
+        {
             LogHandler.WriteLog("gameInitInfo가 null입니다. 로드할 수 없습니다.", this.GetType().Name, LogType.Error, true);
+        }
     }
 
     /// <summary>
@@ -160,46 +184,42 @@ public class EntityManager : Singleton<EntityManager>
     {
         if (typeof(T) == typeof(CharacterInfo))
         {
-            foreach (CharacterInfo _ch in characterList)
+            if (characterDict.ContainsKey(_id))
             {
-                if (_ch.ID == _id)
-                {
-                    T _copyEntity = Instantiate(_ch) as T;
-                    return _copyEntity;
-                }
+                T _copyEntity = Instantiate(characterDict[_id]) as T;
+                return _copyEntity;
             }
         }
         else if (typeof(T) == typeof(WeaponInfo))
         {
-            foreach (WeaponInfo _wp in weaponList)
+            if (weaponDict.ContainsKey(_id))
             {
-                if (_wp.ID == _id)
-                {
-                    T _copyEntity = Instantiate(_wp) as T;
-                    return _copyEntity;
-                }
+                T _copyEntity = Instantiate(weaponDict[_id]) as T;
+                return _copyEntity;
             }
         }
         else if (typeof(T) == typeof(WearInfo))
         {
-            foreach (WearInfo _we in wearList)
+            if (wearDict.ContainsKey(_id))
             {
-                if (_we.ID == _id)
-                {
-                    T _copyEntity = Instantiate(_we) as T;
-                    return _copyEntity;
-                }
+                T _copyEntity = Instantiate(wearDict[_id]) as T;
+                return _copyEntity;
+            }
+        }
+        else if (typeof(T) == typeof(SkillInfo))
+        {
+            if (skillDict.ContainsKey(_id))
+            {
+                T _copyEntity = Instantiate(skillDict[_id]) as T;
+                return _copyEntity;
             }
         }
         else if (typeof(T) == typeof(GameInitInfo))
         {
-            foreach (GameInitInfo _gi in gameInitList)
+            if (gameInitDict.ContainsKey(_id))
             {
-                if (_gi.ID == _id)
-                {
-                    T _copyEntity = Instantiate(_gi) as T;
-                    return _copyEntity;
-                }
+                T _copyEntity = Instantiate(gameInitDict[_id]) as T;
+                return _copyEntity;
             }
         }
 

@@ -13,9 +13,6 @@ public static class SceneHandler
     public static string CurrentScene => currentScene;
     #endregion
 
-    /// <summary>
-    /// 정적 생성자
-    /// </summary>
     static SceneHandler()
     {
         //현재 씬 이름을 저장
@@ -27,7 +24,6 @@ public static class SceneHandler
     /// <summary>
     /// 씬 불러오기
     /// </summary>
-    /// <param name="id"></param>
     public static void LoadScene(string _id)
     {
         SceneManager.LoadScene(_id);
@@ -42,5 +38,4 @@ public static class SceneHandler
     /// </summary>
     [RuntimeInitializeOnLoadMethod]
     static void MyNameIsKimSuHanMuIsVeryLongNameYouKnowAreIMean() { }
-
 }

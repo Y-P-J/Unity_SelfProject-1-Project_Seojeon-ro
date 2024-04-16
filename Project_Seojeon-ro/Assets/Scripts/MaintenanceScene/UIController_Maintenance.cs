@@ -82,36 +82,34 @@ public class UIController_Maintenance : MonoBehaviour
     /// </summary>
     public void UpdateCharaInfoUI()
     {
-        int index = -1;
+        int _index = -1;
 
         for (int i = 0; i < charaButton.Length; i++)
         {
             if (charaButton[i].gameObject == EventSystem.current.currentSelectedGameObject)
-                index = i;
+                _index = i;
         }
 
-        if (index == -1)
+        if (_index == -1)
         {
             LogHandler.WriteLog("알맞는 버튼 인덱스가 아니거나, 찾지 못했습니다.", this.GetType().Name, LogType.Error, true);
             return;
         }
 
-        UnityEngine.Debug.Log(index + "상태");
+        equipImage[0].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].Weapon.RepImage;
+        equipImage[1].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].Helmet.RepImage;
+        equipImage[2].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].Armor.RepImage;
+        equipImage[3].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].Gloves.RepImage;
+        equipImage[4].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].Shoes.RepImage;
+        equipImage[5].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].Ring.RepImage;
 
-        equipImage[0].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].Weapon.RepImage;
-        equipImage[1].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].Helmet.RepImage;
-        equipImage[2].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].Armor.RepImage;
-        equipImage[3].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].Gloves.RepImage;
-        equipImage[4].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].Shoes.RepImage;
-        equipImage[5].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].Ring.RepImage;
-
-        detailStatusTexts[0].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].Level.ToString();
-        detailStatusTexts[1].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].FinalStatus.hp.ToString();
-        detailStatusTexts[2].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].FinalStatus.mp.ToString();
-        detailStatusTexts[3].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].FinalStatus.speed.ToString();
-        detailStatusTexts[4].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].FinalStatus.attack.ToString();
-        detailStatusTexts[5].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].FinalStatus.defense.ToString();
-        detailStatusTexts[6].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].FinalStatus.critical.ToString();
-        detailStatusTexts[7].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[index].FinalStatus.avoid.ToString();
+        detailStatusTexts[0].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].Level.ToString();
+        detailStatusTexts[1].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].FinalStatus.hp.ToString();
+        detailStatusTexts[2].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].FinalStatus.mp.ToString();
+        detailStatusTexts[3].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].FinalStatus.speed.ToString();
+        detailStatusTexts[4].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].FinalStatus.attack.ToString();
+        detailStatusTexts[5].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].FinalStatus.defense.ToString();
+        detailStatusTexts[6].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].FinalStatus.critical.ToString();
+        detailStatusTexts[7].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[_index].FinalStatus.avoid.ToString();
     }
 }

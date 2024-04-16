@@ -10,13 +10,9 @@ public class AudioClipController_Title : AudioClipController
     [Tooltip("타이틀 배경음")]
     [SerializeField] AudioClip titleBGMAudio;
 
-
-
     [Header("SE")]
     [Tooltip("UI버튼 클릭음")]
     [SerializeField] AudioClip uibuttonAudio;
-
-
 
     void Start()
     {

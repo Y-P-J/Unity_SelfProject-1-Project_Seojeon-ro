@@ -10,13 +10,9 @@ public class AudioClipController_Maintenance : AudioClipController
     [Tooltip("메인테넌스 배경음")]
     [SerializeField] AudioClip maintenanceBGMAudio;
 
-
-
     [Header("SE")]
     [Tooltip("UI버튼 클릭음")]
     [SerializeField] AudioClip uibuttonAudio;
-
-
 
     void Start()
     {

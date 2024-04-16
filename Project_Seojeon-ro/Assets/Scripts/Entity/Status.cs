@@ -23,28 +23,28 @@ public struct Status
     [Tooltip("È¸ÇÇÀ²")]
     public float avoid;
 
-    public static Status operator +(Status a, Status b)
+    public static Status operator +(Status _origin, Status _target)
     {
-        Status result = new Status();
-        result.hp = a.hp + b.hp;
-        result.mp = a.mp + b.mp;
-        result.speed = a.speed + b.speed;
-        result.attack = a.attack + b.attack;
-        result.defense = a.defense + b.defense;
-        result.critical = a.critical + b.critical;
-        result.avoid = a.avoid + b.avoid;
-        return result;
+        Status _result = new Status();
+        _result.hp = _origin.hp + _target.hp;
+        _result.mp = _origin.mp + _target.mp;
+        _result.speed = _origin.speed + _target.speed;
+        _result.attack = _origin.attack + _target.attack;
+        _result.defense = _origin.defense + _target.defense;
+        _result.critical = _origin.critical + _target.critical;
+        _result.avoid = _origin.avoid + _target.avoid;
+        return _result;
     }
-    public static Status operator *(Status a, int b)
+    public static Status operator *(Status _origin, int _scale)
     {
-        Status result = new Status();
-        result.hp = a.hp * b;
-        result.mp = a.mp * b;
-        result.speed = a.speed * b;
-        result.attack = a.attack * b;
-        result.defense = a.defense * b;
-        result.critical = a.critical * b;
-        result.avoid = a.avoid * b;
-        return result;
+        Status _result = new Status();
+        _result.hp = _origin.hp * _scale;
+        _result.mp = _origin.mp * _scale;
+        _result.speed = _origin.speed * _scale;
+        _result.attack = _origin.attack * _scale;
+        _result.defense = _origin.defense * _scale;
+        _result.critical = _origin.critical * _scale;
+        _result.avoid = _origin.avoid * _scale;
+        return _result;
     }
 }

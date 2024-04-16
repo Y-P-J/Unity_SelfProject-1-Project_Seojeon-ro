@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-//볼륨과 관련된 기능을 담당하는 클래스
+//볼륨과 관련된 기능을 담당하는 클래스(실행은 AudioClipController에서 관리한다)
 public class VolumeManager : Singleton<VolumeManager>
 {
     [Header("컴포넌트")]

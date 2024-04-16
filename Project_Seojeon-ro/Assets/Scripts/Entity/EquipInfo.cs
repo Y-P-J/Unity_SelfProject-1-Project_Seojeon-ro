@@ -41,8 +41,6 @@ public abstract class EquipInfo : ScriptableObject
     [Tooltip("장비 스테이터스")]
     [SerializeField] protected Status status;
 
-
-
     #region 람다식 프로퍼티
     public string EquipName => equipName;
     public int Number => number;
