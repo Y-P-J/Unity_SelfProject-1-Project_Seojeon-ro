@@ -36,6 +36,15 @@ public class CharacterInfo : ScriptableObject
 
     [Space]
 
+    [Tooltip("캐릭터의 1번 스킬 정보")]
+    [SerializeField] protected SkillInfo firstSkill;
+    [Tooltip("캐릭터의 2번 스킬 정보")]
+    [SerializeField] protected SkillInfo secondSkill;
+    [Tooltip("캐릭터의 3번 스킬 정보")]
+    [SerializeField] protected SkillInfo thirdSkill;
+
+    [Space]
+
     //각 하단의 EQUIP_TYPE[] 배열은 해당 장비를 장착할 수 있는 타입을 표시함
     [Tooltip("현재 장착 무기")]
     [SerializeField] protected WeaponInfo weapon;
@@ -70,6 +79,9 @@ public class CharacterInfo : ScriptableObject
     public Status FinalStatus => finalStatus;
     public int CurrentHp => currentHp;
     public int CurrentMp => currentMp;
+    public SkillInfo FirstSkill => firstSkill;
+    public SkillInfo SecondSkill => secondSkill;
+    public SkillInfo ThirdSkill => thirdSkill;
     public EquipInfo Weapon => weapon;
     public WEAPON_TYPE[] WeaponTypes => weaponTypes;
     public EquipInfo Helmet => helmet;

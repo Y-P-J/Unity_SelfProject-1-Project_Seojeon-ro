@@ -50,16 +50,19 @@ MonoBehaviour:
     avoid: 20
   currentHp: 1000
   currentMp: 300
+  firstSkill: {fileID: 11400000, guid: bf7885ec69815644ba49151d4c640d16, type: 2}
+  secondSkill: {fileID: 11400000, guid: bf7885ec69815644ba49151d4c640d16, type: 2}
+  thirdSkill: {fileID: 11400000, guid: bf7885ec69815644ba49151d4c640d16, type: 2}
   weapon: {fileID: 11400000, guid: 9d626678f85bfbf4baa23d8e02e56e53, type: 2}
   weaponTypes: 0100000002000000
-  helmet: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
+  helmet: {fileID: 11400000, guid: 9056c3f626afbe5418b48b18cea081c6, type: 2}
   helmetTypes: 01000000
-  armor: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
+  armor: {fileID: 11400000, guid: 9056c3f626afbe5418b48b18cea081c6, type: 2}
   armorTypes: 0b000000
-  gloves: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
+  gloves: {fileID: 11400000, guid: 9056c3f626afbe5418b48b18cea081c6, type: 2}
   gloveTypes: 15000000
-  shoes: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
+  shoes: {fileID: 11400000, guid: 9056c3f626afbe5418b48b18cea081c6, type: 2}
   shoesTypes: 1f000000
-  ring: {fileID: 11400000, guid: 5a1cdb8b50666fd4e97614fc73069bf7, type: 2}
+  ring: {fileID: 11400000, guid: 9056c3f626afbe5418b48b18cea081c6, type: 2}
   ringTypes: 65000000
   repImage: {fileID: 21300000, guid: 164f1080f33e94840a26df8bc796de1c, type: 3}

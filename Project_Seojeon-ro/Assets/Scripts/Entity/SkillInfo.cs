@@ -40,12 +40,13 @@ public class SkillInfo : ScriptableObject
     public string SkillName => skillName;
     public int Number => number;
     public string ID => id;
-    public string Description => description;
     public string DescriptionForUI => descriptionForUI;
     public int Damage => damage;
     public float AttackScale => attackScale;
     public int MpCost => mpCost;
     public int Cooldown => cooldown;
+
+    public Sprite RepImage => repImage;
     #endregion
 
     void OnEnable()

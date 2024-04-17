@@ -40,10 +40,9 @@ public class WeaponInfoEditor : Editor
 
             foreach (WeaponInfo _info in _allWeaponInfos)
             {
-                if (_info != _weaponInfo && _info.Number == _weaponInfo.Number)
+                if (_info != _weaponInfo && _info.Number == _weaponInfo.Number && _info.WeaponType == _weaponInfo.WeaponType)
                 {
-                    EditorGUILayout.HelpBox("동일한 Number를 사용한 WeaponInfo에셋이 있습니다!", MessageType.Warning);
-                    Debug.LogError("동일한 Number를 사용한 WeaponInfo에셋이 있습니다!");
+                    EditorGUILayout.HelpBox("동일한 Number와 타입을 사용한 WeaponInfo에셋이 있습니다!", MessageType.Warning);
                     break;
                 }
             }
@@ -64,10 +63,9 @@ public class WearInfoEditor : Editor
 
             foreach (WearInfo _info in _allWearInfos)
             {
-                if (_info != _wearInfo && _info.Number == _wearInfo.Number)
+                if (_info != _wearInfo && _info.Number == _wearInfo.Number && _info.WearType == _wearInfo.WearType)
                 {
-                    EditorGUILayout.HelpBox("동일한 Number를 사용한 WearInfo에셋이 있습니다!", MessageType.Warning);
-                    Debug.LogError("동일한 Number를 사용한 WearInfo에셋이 있습니다!");
+                    EditorGUILayout.HelpBox("동일한 Number와 타입을 사용한 WearInfo에셋이 있습니다!", MessageType.Warning);
                     break;
                 }
             }
@@ -91,7 +89,6 @@ public class SkillInfoEditor : Editor
                 if (_info != _skillInfo && _info.Number == _skillInfo.Number)
                 {
                     EditorGUILayout.HelpBox("동일한 Number를 사용한 SkillInfo에셋이 있습니다!", MessageType.Warning);
-                    Debug.LogError("동일한 Number를 사용한 SkillInfo에셋이 있습니다!");
                     break;
                 }
             }
@@ -115,7 +112,6 @@ public class GameInitInfoEditor : Editor
                 if (_info != _gameInitInfo && _info.Number == _gameInitInfo.Number)
                 {
                     EditorGUILayout.HelpBox("동일한 Number를 사용한 GameInitInfo에셋이 있습니다!", MessageType.Warning);
-                    Debug.LogError("동일한 Number를 사용한 GameInitInfo에셋이 있습니다!");
                     break;
                 }
             }

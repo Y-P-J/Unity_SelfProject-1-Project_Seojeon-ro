@@ -11,7 +11,7 @@ public enum WEAR_TYPE
 
     HELMET = 1,         //≈ı±∏
     ARMOR = 11,         //∞©ø 
-    GLOVE = 21,         //¿Â∞©
+    GLOVES = 21,        //¿Â∞©
     SHOES = 31,         //Ω≈πﬂ
 
     RING = 101,         //π›¡ˆ

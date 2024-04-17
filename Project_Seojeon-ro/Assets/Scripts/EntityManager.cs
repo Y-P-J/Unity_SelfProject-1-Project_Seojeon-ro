@@ -62,6 +62,8 @@ public class EntityManager : Singleton<EntityManager>
                     characterDict.Add(_chara.ID, _chara);
                 }
             }
+
+            characterDict = new SerializedDictionary<string, CharacterInfo>(characterDict.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
         }
         else
         {
@@ -89,6 +91,8 @@ public class EntityManager : Singleton<EntityManager>
                     weaponDict.Add(_weapon.ID, _weapon);
                 }
             }
+
+            weaponDict = new SerializedDictionary<string, WeaponInfo>(weaponDict.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
         }
         else
         {
@@ -116,6 +120,8 @@ public class EntityManager : Singleton<EntityManager>
                     wearDict.Add(_wear.ID, _wear);
                 }
             }
+
+            wearDict = new SerializedDictionary<string, WearInfo>(wearDict.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
         }
         else
         {
@@ -143,6 +149,8 @@ public class EntityManager : Singleton<EntityManager>
                     skillDict.Add(_skill.ID, _skill);
                 }
             }
+
+            skillDict = new SerializedDictionary<string, SkillInfo>(skillDict.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
         }
         else
         {
@@ -170,6 +178,8 @@ public class EntityManager : Singleton<EntityManager>
                     gameInitDict.Add(_gameInit.ID, _gameInit);
                 }
             }
+
+            gameInitDict = new SerializedDictionary<string, GameInitInfo>(gameInitDict.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
         }
         else
         {
@@ -190,20 +200,23 @@ public class EntityManager : Singleton<EntityManager>
                 return _copyEntity;
             }
         }
-        else if (typeof(T) == typeof(WeaponInfo))
+        else if(typeof(T).IsSubclassOf(typeof(EquipInfo)) || typeof(T) == typeof(EquipInfo))//제네릭 타입이 EquipInfo의 자식 클래스인지 확인
         {
-            if (weaponDict.ContainsKey(_id))
+            if (typeof(T) == typeof(WeaponInfo) || typeof(T) == typeof(EquipInfo))
             {
-                T _copyEntity = Instantiate(weaponDict[_id]) as T;
-                return _copyEntity;
+                if (weaponDict.ContainsKey(_id))
+                {
+                    T _copyEntity = Instantiate(weaponDict[_id]) as T;
+                    return _copyEntity;
+                }
             }
-        }
-        else if (typeof(T) == typeof(WearInfo))
-        {
-            if (wearDict.ContainsKey(_id))
+            if (typeof(T) == typeof(WearInfo) || typeof(T) == typeof(EquipInfo))
             {
-                T _copyEntity = Instantiate(wearDict[_id]) as T;
-                return _copyEntity;
+                if (wearDict.ContainsKey(_id))
+                {
+                    T _copyEntity = Instantiate(wearDict[_id]) as T;
+                    return _copyEntity;
+                }
             }
         }
         else if (typeof(T) == typeof(SkillInfo))

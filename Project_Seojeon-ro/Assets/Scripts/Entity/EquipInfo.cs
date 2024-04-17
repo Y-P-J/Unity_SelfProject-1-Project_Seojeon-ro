@@ -28,18 +28,24 @@ public abstract class EquipInfo : ScriptableObject
 
     [Space]
 
+    [Tooltip("장비 설명")]
+    [SerializeField, TextArea(2, 3)] protected string description;
+
+    [Space]
+
     [Tooltip("장비 희귀도")]
     [SerializeField] protected QUILTY quilty;
+
+    [Space]
+
+    [Tooltip("장비 스테이터스")]
+    [SerializeField] protected Status status;
 
     [Space]
 
     [Tooltip("장비 대표 이미지")]
     [SerializeField] protected Sprite repImage;
 
-    [Space]
-
-    [Tooltip("장비 스테이터스")]
-    [SerializeField] protected Status status;
 
     #region 람다식 프로퍼티
     public string EquipName => equipName;
