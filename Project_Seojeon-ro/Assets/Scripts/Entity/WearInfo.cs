@@ -30,4 +30,17 @@ public class WearInfo : EquipInfo
     {
         id = IDGenerator.GenerateID(this);
     }
+
+    public string WearTypeToString()
+    {
+        return wearType switch
+        {
+            WEAR_TYPE.HELMET => "투구",
+            WEAR_TYPE.ARMOR => "갑옷",
+            WEAR_TYPE.GLOVES => "장갑",
+            WEAR_TYPE.SHOES => "신발",
+            WEAR_TYPE.RING => "반지",
+            _ => "없음",
+        };
+    }
 }

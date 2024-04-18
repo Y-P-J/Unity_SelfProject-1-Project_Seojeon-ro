@@ -18,16 +18,19 @@ public class ItemIconIndexCheck : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        int _index = -1;
+        bool _isActivated = false;
+
         for (int i = 0; i < uiController.InventoryImages.Length; i++)
         {
             if (uiController.InventoryImages[i].gameObject == gameObject)
             {
-                uiController.UpdateItemDescriptionUI(i, true);
-                return;
+                _index = i;
+                _isActivated = true;
             }
         }
 
-        uiController.UpdateItemDescriptionUI(-1, false);
+        uiController.UpdateItemDescriptionUI(_index, _isActivated);
     }
 
     public void OnPointerExit(PointerEventData eventData)

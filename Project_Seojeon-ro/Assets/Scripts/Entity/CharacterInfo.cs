@@ -48,22 +48,22 @@ public class CharacterInfo : ScriptableObject
     //각 하단의 EQUIP_TYPE[] 배열은 해당 장비를 장착할 수 있는 타입을 표시함
     [Tooltip("현재 장착 무기")]
     [SerializeField] protected WeaponInfo weapon;
-    [SerializeField] WEAPON_TYPE[] weaponTypes;
+    [SerializeField] protected WEAPON_TYPE[] weaponTypes;
     [Tooltip("현재 장착 헬멧")]
     [SerializeField] protected WearInfo helmet;
-    [SerializeField] WEAR_TYPE[] helmetTypes;
+    [SerializeField] protected WEAR_TYPE[] helmetTypes;
     [Tooltip("현재 장착 갑옷")]
     [SerializeField] protected WearInfo armor;
-    [SerializeField] WEAR_TYPE[] armorTypes;
+    [SerializeField] protected WEAR_TYPE[] armorTypes;
     [Tooltip("현재 장착 장갑")]
     [SerializeField] protected WearInfo gloves;
-    [SerializeField] WEAR_TYPE[] gloveTypes;
+    [SerializeField] protected WEAR_TYPE[] gloveTypes;
     [Tooltip("현재 장착 신발")]
     [SerializeField] protected WearInfo shoes;
-    [SerializeField] WEAR_TYPE[] shoesTypes;
+    [SerializeField] protected WEAR_TYPE[] shoesTypes;
     [Tooltip("현재 장착 반지")]
     [SerializeField] protected WearInfo ring;
-    [SerializeField] WEAR_TYPE[] ringTypes;
+    [SerializeField] protected WEAR_TYPE[] ringTypes;
 
     [Tooltip("캐릭터 대표 이미지")]
     [SerializeField] protected Sprite repImage;
@@ -103,8 +103,59 @@ public class CharacterInfo : ScriptableObject
 
         levelModifiedStatus = originStatus + levelUpStatus * (level - 1);
 
-        finalStatus = levelModifiedStatus + weapon.Status + helmet.Status + armor.Status + gloves.Status + shoes.Status + ring.Status;
+        UpdateStatus();
+    }
 
+    public WeaponInfo SwitchWeapon(WeaponInfo _weapon)
+    {
+        WeaponInfo _temp = weapon;
+        weapon = _weapon;
+
+        UpdateStatus();
+
+        return _temp;
+    }
+
+    public WearInfo SwitchWear(WearInfo _wear)
+    {
+        WearInfo _temp = null;
+
+        switch (_wear.WearType)
+        {
+            case WEAR_TYPE.HELMET:
+                _temp = helmet;
+                helmet = _wear;
+                break;
+
+            case WEAR_TYPE.ARMOR:
+                _temp = armor;
+                armor = _wear;
+                break;
+
+            case WEAR_TYPE.GLOVES:
+                _temp = gloves;
+                gloves = _wear;
+                break;
+
+            case WEAR_TYPE.SHOES:
+                _temp = shoes;
+                shoes = _wear;
+                break;
+
+            case WEAR_TYPE.RING:
+                _temp = ring;
+                ring = _wear;
+                break;
+        }
+
+        UpdateStatus();
+
+        return _temp;
+    }
+
+    public void UpdateStatus()
+    {
+        finalStatus = levelModifiedStatus + weapon.Status + helmet.Status + armor.Status + gloves.Status + shoes.Status + ring.Status;
         currentHp = finalStatus.hp;
         currentMp = finalStatus.mp;
     }

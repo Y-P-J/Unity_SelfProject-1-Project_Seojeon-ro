@@ -9,14 +9,17 @@ public class GameProgressManager : Singleton<GameProgressManager>
     [SerializeField, ReadOnly] int currentStage = -1;
 
     [Tooltip("플레이어 캐릭터 그룹")]
-    [SerializeField] CharacterGroupController playerCharacter;
+    [SerializeField] protected CharacterGroupController playerCharacter;
     [Tooltip("적 캐릭터 그룹")]
-    [SerializeField] CharacterGroupController enemyCharacter;
+    [SerializeField] protected CharacterGroupController enemyCharacter;
+    [Tooltip("아이템 인벤토리")]
+    [SerializeField] protected Inventory inventory;
 
     #region 람다식 프로퍼티
     public int CurrentStage => currentStage;
     public CharacterGroupController PlayerCharacter => playerCharacter;
     public CharacterGroupController EnemyCharacter => enemyCharacter;
+    public Inventory Inventory => inventory;
     #endregion
 
     /// <summary>
@@ -32,5 +35,34 @@ public class GameProgressManager : Singleton<GameProgressManager>
         playerCharacter.Setup(_info.PlayerChara1_ID, _info.PlayerChara2_ID, _info.PlayerChara3_ID);
 
         enemyCharacter.Setup(_info.EnemyChara1_ID, _info.EnemyChara2_ID, _info.EnemyChara3_ID);
+
+        inventory.Setup();
+    }
+
+    /// <summary>
+    /// 캐릭터와 인벤토리의 아이템을 교환하는 함수
+    /// </summary>
+    public void SwitchItem(int _charaIndex, int _invenIndex)
+    {
+        CharacterInfo _character = playerCharacter.CharacterGroup[_charaIndex];
+        EquipInfo _item = inventory.Items[_invenIndex];
+
+        if (_item is WeaponInfo _weapon)
+        {
+            for(int i = 0; i < _character.WeaponTypes.Length; i++)
+            {
+                if (_character.WeaponTypes[i] == _weapon.WeaponType)
+                {
+                    inventory.Items[_invenIndex] = _character.SwitchWeapon(_weapon);
+                    break;
+                }
+            }
+        }
+        else if (_item is WearInfo _wear)
+        {
+            inventory.Items[_invenIndex] = _character.SwitchWear(_wear);
+        }
+
+        inventory.SortInventory();
     }
 }

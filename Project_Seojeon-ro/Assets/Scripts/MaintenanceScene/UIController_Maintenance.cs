@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -49,9 +50,28 @@ public class UIController_Maintenance : MonoBehaviour
     [SerializeField] GameObject inventoryUI;
     [Tooltip("인벤토리 이미지들")]
     [SerializeField, ReadOnly] Image[] inventoryImages;
+
+    [Header("아이템 설명")]
     [Tooltip("아이템 설명 UI")]
     [SerializeField] GameObject itemDescriptionUI;
-    
+    [Tooltip("아이템 대표 이미지")]
+    [SerializeField] Image itemRepImage;
+    [Tooltip("아이템 이름 텍스트")]
+    [SerializeField] TMP_Text itemNameText;
+    [Tooltip("아이템 타입 텍스트")]
+    [SerializeField] TMP_Text itemTypeText;
+    [Tooltip("아이템 품질 텍스트")]
+    [SerializeField] TMP_Text itemQuiltyText;
+    [Tooltip("아이템 설명 텍스트")]
+    [SerializeField] TMP_Text itemDescriptionText;
+
+    [SerializeField] TMP_Text itemAttackText;
+    [SerializeField] TMP_Text itemDefenseText;
+    [SerializeField] TMP_Text itemCriticalText;
+    [SerializeField] TMP_Text itemAvoidText;
+    [SerializeField] TMP_Text itemHpText;
+    [SerializeField] TMP_Text itemMpText;
+    [SerializeField] TMP_Text itemSpeedText;
 
     [Header("적 요약 정보")]
     [Tooltip("적 대표 이미지")]
@@ -83,24 +103,14 @@ public class UIController_Maintenance : MonoBehaviour
             {
                 if (_ray[0].gameObject == inventoryImages[i].gameObject)
                 {
-                    Inventory.Instance.SwitchItem(i);
+                    GameProgressManager.Instance.SwitchItem(selectedCharaIndex, i);
+                    UpdateItemDescriptionUI(-1, false);
                     UpdateCharaInfoUI();
                     UpdateInventoryUI();
                     break;
                 }
             }
         }
-
-        //선택된 오브젝트가 없다면 마지막으로 선택된 오브젝트를 선택
-        if (EventSystem.current.currentSelectedGameObject == null)
-        {
-            EventSystem.current.SetSelectedGameObject(lastSelect);
-        }
-        else//선택된 오브젝트가 있다면 마지막으로 선택된 오브젝트를 갱신
-        {
-            lastSelect = EventSystem.current.currentSelectedGameObject;
-        }
-        //이 과정을 통해 마우스로 선택된 오브젝트가 없을 때, 마지막으로 선택된 오브젝트를 선택하게 함
     }
 
     void OnEnable()
@@ -165,16 +175,28 @@ public class UIController_Maintenance : MonoBehaviour
 
         selectedCharaIndex = _index;
 
-        Debug.Log(selectedCharaIndex + "번째 캐릭터 선택");
-
         UpdateCharaInfoUI();
     }
 
     /// <summary>
     /// 캐릭터 정보 UI를 갱신하는 함수
     /// </summary>
+    readonly Color selectedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+    readonly Color unselectedColor = new Color(1f, 1f, 1f, 1f);
     public void UpdateCharaInfoUI()
     {
+        for(int i =0;charaButton.Length > i; i++)
+        {
+            if(i == selectedCharaIndex)
+            {
+                charaButton[i].gameObject.GetComponent<Image>().color = selectedColor;
+            }
+            else
+            {
+                charaButton[i].gameObject.GetComponent<Image>().color = unselectedColor;
+            }
+        }
+
         equipImage[0].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Weapon.RepImage;
         equipImage[1].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Helmet.RepImage;
         equipImage[2].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Armor.RepImage;
@@ -191,7 +213,7 @@ public class UIController_Maintenance : MonoBehaviour
         detailStatusTexts[6].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FinalStatus.critical.ToString();
         detailStatusTexts[7].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FinalStatus.avoid.ToString();
 
-        for(int i = 0; i < skillImages.Length; i++)
+        for (int i = 0; i < skillImages.Length; i++)
         {
             skillImages[i].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FirstSkill.RepImage;
             skillNameTexts[i].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FirstSkill.SkillName;
@@ -208,25 +230,47 @@ public class UIController_Maintenance : MonoBehaviour
     {
         for (int i = 0; i < inventoryImages.Length; i++)
         {
-            if (Inventory.Instance.Items[i].ID.EndsWith("0"))
+            if (GameProgressManager.Instance.Inventory.Items[i].ID.EndsWith("0"))
                 inventoryImages[i].gameObject.SetActive(false);
             else
-                inventoryImages[i].sprite = Inventory.Instance.Items[i].RepImage;
+                inventoryImages[i].sprite = GameProgressManager.Instance.Inventory.Items[i].RepImage;
         }
     }
 
+    /// <summary>
+    /// 아이템 설명 UI를 갱신하는 함수
+    /// </summary>
     public void UpdateItemDescriptionUI(int _index, bool _b)
     {
         if (!_b)
-        {
             itemDescriptionUI.SetActive(false);
-        }
         else
         {
             RectTransform _description = itemDescriptionUI.GetComponent<RectTransform>();
             RectTransform _image = inventoryImages[_index].GetComponent<RectTransform>();
+            RectTransform _inventory = inventoryUI.GetComponent<RectTransform>();
 
-            _description.position = new Vector2(_image.position.x, _image.position.y - (_image.rect.height * 0.5f));
+            if (_index < 15)
+                _description.position = new Vector2(_inventory.position.x, _inventory.position.y - (_description.sizeDelta.y * 0.5f));
+            else
+                _description.position = new Vector2(_inventory.position.x, _inventory.position.y + (_description.sizeDelta.y * 0.5f));
+            
+            itemRepImage.sprite = GameProgressManager.Instance.Inventory.Items[_index].RepImage;
+            itemNameText.text = GameProgressManager.Instance.Inventory.Items[_index].EquipName;
+            if (GameProgressManager.Instance.Inventory.Items[_index] is WeaponInfo _weaponItem)
+                itemTypeText.text = _weaponItem.WeaponTypeToString();
+            else if (GameProgressManager.Instance.Inventory.Items[_index] is WearInfo _wearItem)
+                itemTypeText.text = _wearItem.WearTypeToString();
+            itemQuiltyText.text = GameProgressManager.Instance.Inventory.Items[_index].QualityToString();
+            itemDescriptionText.text = GameProgressManager.Instance.Inventory.Items[_index].Description;
+            itemAttackText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.attack.ToString();
+            itemDefenseText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.defense.ToString();
+            itemCriticalText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.critical.ToString();
+            itemAvoidText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.avoid.ToString();
+            itemHpText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.hp.ToString();
+            itemMpText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.mp.ToString();
+            itemSpeedText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.speed.ToString();
+
             itemDescriptionUI.SetActive(true);
         }
     }

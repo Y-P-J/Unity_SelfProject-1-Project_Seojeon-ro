@@ -28,7 +28,7 @@ public static class IDGenerator
 
         _ID.Append("WP");
         _ID.Append(((int)_info.WeaponType).ToString("D4"));
-        _ID.Append(((int)_info.Quilty).ToString("D2"));
+        _ID.Append(((int)_info.Quality).ToString("D2"));
         _ID.Append(_info.Number.ToString("D4"));
 
         return _ID.ToString();
@@ -43,7 +43,7 @@ public static class IDGenerator
 
         _ID.Append("WE");
         _ID.Append(((int)_info.WearType).ToString("D4"));
-        _ID.Append(((int)_info.Quilty).ToString("D2"));
+        _ID.Append(((int)_info.Quality).ToString("D2"));
         _ID.Append(_info.Number.ToString("D4"));
 
         return _ID.ToString();

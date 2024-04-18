@@ -27,4 +27,15 @@ public class WeaponInfo : EquipInfo
     {
         id = IDGenerator.GenerateID(this);
     }
+
+    public string WeaponTypeToString()
+    {
+        return weaponType switch
+        {
+            WEAPON_TYPE.SWORD => "검",
+            WEAPON_TYPE.AXE => "도끼",
+            WEAPON_TYPE.WAND => "지팡이",
+            _ => "없음",
+        };
+    }
 }

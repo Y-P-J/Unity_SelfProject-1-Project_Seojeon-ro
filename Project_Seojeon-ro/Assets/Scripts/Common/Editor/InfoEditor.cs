@@ -9,6 +9,9 @@ public class CharacterInfoEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        if (Application.isPlaying)
+            return;
+
         base.OnInspectorGUI();
 
         if (target is CharacterInfo _characterInfo)
@@ -32,6 +35,9 @@ public class WeaponInfoEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        if (Application.isPlaying)
+            return;
+
         base.OnInspectorGUI();
 
         if (target is WeaponInfo _weaponInfo)
@@ -55,6 +61,9 @@ public class WearInfoEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        if (Application.isPlaying)
+            return;
+
         base.OnInspectorGUI();
 
         if (target is WearInfo _wearInfo)
@@ -78,6 +87,9 @@ public class SkillInfoEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        if (Application.isPlaying)
+            return;
+
         base.OnInspectorGUI();
 
         if (target is SkillInfo _skillInfo)
@@ -101,6 +113,9 @@ public class GameInitInfoEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        if (Application.isPlaying)
+            return;
+
         base.OnInspectorGUI();
 
         if (target is GameInitInfo _gameInitInfo)

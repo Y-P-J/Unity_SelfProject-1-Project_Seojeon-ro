@@ -17,7 +17,7 @@ MonoBehaviour:
   id: WE0101010001
   description: "\uAE30\uC6B4\uC744 \uACE0\uC591\uC2DC\uD0A4\uB294 \uAE30\uBCF8\uC801\uC778
     \uBC18\uC9C0"
-  quilty: 1
+  quality: 1
   status:
     hp: 0
     mp: 50

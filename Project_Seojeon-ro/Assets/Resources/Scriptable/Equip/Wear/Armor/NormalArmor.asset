@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipName: "\uD3C9\uBC94\uD55C \uAC11\uC637"
   number: 1
-  id: WE0021010001
+  id: WE0011010001
   description: "\uD3C9\uBC94\uD558\uAC8C \uCC29\uC6A9\uD560 \uC218 \uC788\uB294 \uAC11\uC637"
-  quilty: 1
+  quality: 1
   status:
     hp: 100
     mp: 0

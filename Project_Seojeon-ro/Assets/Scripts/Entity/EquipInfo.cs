@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 아이템의 희귀도를 나타내는 열거형
 /// </summary>
-public enum QUILTY
+public enum QUALITY
 {
     NONE = 0,           //없음
 
@@ -34,7 +34,7 @@ public abstract class EquipInfo : ScriptableObject
     [Space]
 
     [Tooltip("장비 희귀도")]
-    [SerializeField] protected QUILTY quilty;
+    [SerializeField] protected QUALITY quality;
 
     [Space]
 
@@ -51,8 +51,22 @@ public abstract class EquipInfo : ScriptableObject
     public string EquipName => equipName;
     public int Number => number;
     public string ID => id;
-    public QUILTY Quilty => quilty;
+    public string Description => description;
+    public QUALITY Quality => quality;
     public Status Status => status;
     public Sprite RepImage => repImage;
     #endregion
+
+    public string QualityToString()
+    {
+        return quality switch
+        {
+            QUALITY.COMMON => "일반",
+            QUALITY.UNCOMMON => "희귀",
+            QUALITY.RARE => "레어",
+            QUALITY.EPIC => "에픽",
+            QUALITY.LEGENDARY => "레전더리",
+            _ => "없음",
+        };
+    }
 }

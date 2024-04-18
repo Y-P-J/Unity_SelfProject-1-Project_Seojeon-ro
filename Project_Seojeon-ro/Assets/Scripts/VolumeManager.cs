@@ -17,13 +17,13 @@ public class VolumeManager : Singleton<VolumeManager>
 
     [Header("값")]
     [Tooltip("마스터 볼륨")]
-    float masterVolume = .3f;
+    float masterVolume = .1f;
 
     [Tooltip("배경음 볼륨")]
-    float bgmVolume = .5f;
+    float bgmVolume = .1f;
 
     [Tooltip("효과음 볼륨")]
-    float seVolume = .5f;
+    float seVolume = .1f;
 
 
 

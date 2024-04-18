@@ -10,7 +10,7 @@ public struct Status
 {
     [Tooltip("체력")]
     public int hp;
-    [Tooltip("마나")]
+    [Tooltip("마력")]
     public int mp;
     [Tooltip("속도")]
     public int speed;

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipName: "\uD3C9\uBC94\uD55C \uC2E0\uBC1C"
   number: 1
-  id: WE0011010001
+  id: WE0031010001
   description: "\uD3C9\uBC94\uD558\uAC8C \uCC29\uC6A9\uD560 \uC218 \uC788\uB294 \uC2E0\uBC1C"
-  quilty: 1
+  quality: 1
   status:
     hp: 30
     mp: 0
@@ -25,5 +25,5 @@ MonoBehaviour:
     defense: 5
     critical: 0
     avoid: 10
-  repImage: {fileID: 21300000, guid: b53db54545fcd5747b7ba5e450c07baf, type: 3}
+  repImage: {fileID: 21300000, guid: 4a59607811bc1f9459591856511467a5, type: 3}
   wearType: 31
