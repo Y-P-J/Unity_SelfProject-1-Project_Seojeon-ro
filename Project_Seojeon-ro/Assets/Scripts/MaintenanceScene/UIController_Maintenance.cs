@@ -45,8 +45,13 @@ public class UIController_Maintenance : MonoBehaviour
     [SerializeField] TMP_Text[] skillCooldownTexts;
 
     [Header("인벤토리")]
+    [Tooltip("인벤토리 UI")]
     [SerializeField] GameObject inventoryUI;
+    [Tooltip("인벤토리 이미지들")]
     [SerializeField, ReadOnly] Image[] inventoryImages;
+    [Tooltip("아이템 설명 UI")]
+    [SerializeField] GameObject itemDescriptionUI;
+    
 
     [Header("적 요약 정보")]
     [Tooltip("적 대표 이미지")]
@@ -57,8 +62,13 @@ public class UIController_Maintenance : MonoBehaviour
     [Tooltip("버튼 갱신용 변수")]
     GameObject lastSelect;
 
+    #region 람다식 프로퍼티
+    public Image[] InventoryImages => inventoryImages;
+    #endregion
+
     void Update()
     {
+        //인벤토리 아이템 클릭시 아이템 변경
         if (Input.GetMouseButtonDown(0))
         {
             PointerEventData _event = new PointerEventData(EventSystem.current);
@@ -66,21 +76,19 @@ public class UIController_Maintenance : MonoBehaviour
             List<RaycastResult> _ray = new List<RaycastResult>();
             EventSystem.current.RaycastAll(_event, _ray);
 
-            foreach (RaycastResult ray in _ray)
-            {
-                if (ray.gameObject.name != "ItemIcon")
-                    continue;
+            if (_ray[0].gameObject.name != "ItemIcon")
+                return;
 
-                for (int i = 0; i < inventoryImages.Length; i++)
+            for (int i = 0; i < inventoryImages.Length; i++)
+            {
+                if (_ray[0].gameObject == inventoryImages[i].gameObject)
                 {
-                    if (ray.gameObject == inventoryImages[i].gameObject)
-                    {
-                        Inventory.Instance.SwitchItem(i);
-                        break;
-                    }
+                    Inventory.Instance.SwitchItem(i);
+                    UpdateCharaInfoUI();
+                    UpdateInventoryUI();
+                    break;
                 }
             }
-
         }
 
         //선택된 오브젝트가 없다면 마지막으로 선택된 오브젝트를 선택
@@ -100,6 +108,7 @@ public class UIController_Maintenance : MonoBehaviour
         //현재 층수를 표시
         floorCountUI.text = GameProgressManager.Instance.CurrentStage.ToString();
 
+        #region 캐릭터 정보 UI 관련
         //캐릭터 정보 UI 갱신
         for (int i = 0; i < GameProgressManager.Instance.PlayerCharacter.CharacterGroup.Length; i++)
         {
@@ -110,37 +119,35 @@ public class UIController_Maintenance : MonoBehaviour
 
         //캐릭터 버튼에 이벤트 추가
         charaButton[0].Select();
-        UpdateCharaInfoUI();
+        CheckCharaButtonClick();
+        #endregion
 
+        #region 인벤토리 UI 관련
         inventoryImages = new Image[30];
-
-        Transform[] _object = inventoryUI.GetComponentsInChildren<Transform>();//인벤토리 UI의 모든 오브젝트를 가져옴
+        //인벤토리 UI의 모든 오브젝트를 가져옴
+        Transform[] _object = inventoryUI.GetComponentsInChildren<Transform>();
         List<Transform> _Items = new List<Transform>();
 
-        foreach(Transform _item in _object)//그중 ItemIcon이라는 이름을 가진 오브젝트만 가져옴
+        foreach (Transform _item in _object)//그중 ItemIcon이라는 이름을 가진 오브젝트만 가져옴
         {
             if (_item.name == "ItemIcon")
                 _Items.Add(_item);
         }
 
-        for(int i = 0; i< _Items.Count; i++)//그렇게 가져온 오브젝트들을 다시 배열에 넣어줌
-        {
+        for (int i = 0; i < _Items.Count; i++)//그렇게 가져온 오브젝트들을 다시 배열에 넣어줌
             inventoryImages[i] = _Items[i].GetComponent<Image>();
-            inventoryImages[i].sprite = Inventory.Instance.Items[i].RepImage;
-        }
+
+        UpdateInventoryUI();
+        #endregion
 
         //적 정보 UI 갱신
-        for (int i = 0; i < GameProgressManager.Instance.EnemyCharacter.CharacterGroup.Length; i++)
-        {
-            enemyRepImages[i].sprite = GameProgressManager.Instance.EnemyCharacter.CharacterGroup[i].RepImage;
-            enemyLevelTexts[i].text = GameProgressManager.Instance.EnemyCharacter.CharacterGroup[i].Level.ToString();
-        }
+        UpdateEnemyInfoUI();
     }
 
     /// <summary>
-    /// 캐릭터 정보 UI를 갱신하는 함수
+    /// 캐릭터버튼 클릭시 호출되는 함수
     /// </summary>
-    public void UpdateCharaInfoUI()
+    public void CheckCharaButtonClick()
     {
         int _index = -1;
 
@@ -158,6 +165,16 @@ public class UIController_Maintenance : MonoBehaviour
 
         selectedCharaIndex = _index;
 
+        Debug.Log(selectedCharaIndex + "번째 캐릭터 선택");
+
+        UpdateCharaInfoUI();
+    }
+
+    /// <summary>
+    /// 캐릭터 정보 UI를 갱신하는 함수
+    /// </summary>
+    public void UpdateCharaInfoUI()
+    {
         equipImage[0].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Weapon.RepImage;
         equipImage[1].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Helmet.RepImage;
         equipImage[2].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Armor.RepImage;
@@ -181,6 +198,48 @@ public class UIController_Maintenance : MonoBehaviour
             skillDescriptionTexts[i].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FirstSkill.DescriptionForUI;
             skillUseManaTexts[i].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FirstSkill.MpCost.ToString();
             skillCooldownTexts[i].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FirstSkill.Cooldown.ToString();
+        }
+    }
+
+    /// <summary>
+    /// 인벤토리 UI를 갱신하는 함수
+    /// </summary>
+    public void UpdateInventoryUI()
+    {
+        for (int i = 0; i < inventoryImages.Length; i++)
+        {
+            if (Inventory.Instance.Items[i].ID.EndsWith("0"))
+                inventoryImages[i].gameObject.SetActive(false);
+            else
+                inventoryImages[i].sprite = Inventory.Instance.Items[i].RepImage;
+        }
+    }
+
+    public void UpdateItemDescriptionUI(int _index, bool _b)
+    {
+        if (!_b)
+        {
+            itemDescriptionUI.SetActive(false);
+        }
+        else
+        {
+            RectTransform _description = itemDescriptionUI.GetComponent<RectTransform>();
+            RectTransform _image = inventoryImages[_index].GetComponent<RectTransform>();
+
+            _description.position = new Vector2(_image.position.x, _image.position.y - (_image.rect.height * 0.5f));
+            itemDescriptionUI.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// 적 정보 UI를 갱신하는 함수
+    /// </summary>
+    public void UpdateEnemyInfoUI()
+    {
+        for (int i = 0; i < GameProgressManager.Instance.EnemyCharacter.CharacterGroup.Length; i++)
+        {
+            enemyRepImages[i].sprite = GameProgressManager.Instance.EnemyCharacter.CharacterGroup[i].RepImage;
+            enemyLevelTexts[i].text = GameProgressManager.Instance.EnemyCharacter.CharacterGroup[i].Level.ToString();
         }
     }
 }

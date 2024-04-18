@@ -9,4 +9,9 @@ public class SceneController : MonoBehaviour
     /// 씬을 로드하는 함수
     /// </summary>
     public void LoadScene(string _id) => SceneHandler.LoadScene(_id);
+
+    /// <summary>
+    /// 게임을 종료하는 함수
+    /// </summary>
+    public void ExitGame() => GameManager.Instance.ExitGame();
 }
