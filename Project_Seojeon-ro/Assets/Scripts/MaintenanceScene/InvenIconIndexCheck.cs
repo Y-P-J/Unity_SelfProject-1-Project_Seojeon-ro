@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 //아이템 아이콘의 인덱스를 체크하는 클래스
-public class ItemIconIndexCheck : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class InvenIconIndexCheck : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     UIController_Maintenance uiController;
 
@@ -27,10 +27,23 @@ public class ItemIconIndexCheck : MonoBehaviour, IPointerEnterHandler, IPointerE
             {
                 _index = i;
                 _isActivated = true;
+
+                uiController.UpdateItemDescriptionUI(_index, _isActivated, true);
+                break;
             }
         }
 
-        uiController.UpdateItemDescriptionUI(_index, _isActivated);
+        for(int i = 0; i < uiController.EquipImages.Length; i++)
+        {
+            if (uiController.EquipImages[i].gameObject == gameObject)
+            {
+                _index = i;
+                _isActivated = true;
+
+                uiController.UpdateItemDescriptionUI(_index, _isActivated, false);
+            }
+        }
+
     }
 
     public void OnPointerExit(PointerEventData eventData)

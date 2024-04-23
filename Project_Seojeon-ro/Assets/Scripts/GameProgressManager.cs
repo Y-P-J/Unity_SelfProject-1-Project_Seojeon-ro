@@ -40,9 +40,9 @@ public class GameProgressManager : Singleton<GameProgressManager>
     }
 
     /// <summary>
-    /// 캐릭터와 인벤토리의 아이템을 교환하는 함수
+    /// 인벤토리에서 아이템을 교환하는 함수
     /// </summary>
-    public void SwitchItem(int _charaIndex, int _invenIndex)
+    public void SwitchItemForInven(int _charaIndex, int _invenIndex)
     {
         CharacterInfo _character = playerCharacter.CharacterGroup[_charaIndex];
         EquipInfo _item = inventory.Items[_invenIndex];
@@ -62,6 +62,36 @@ public class GameProgressManager : Singleton<GameProgressManager>
         {
             inventory.Items[_invenIndex] = _character.SwitchWear(_wear);
         }
+
+        inventory.SortInventory();
+    }
+
+    /// <summary>
+    /// 장비창에서 아이템을 교환하는 함수
+    /// </summary>
+    public void SwitchItemForEquip(int _charaIndex, int _EquipIndex)
+    {
+        CharacterInfo _character = playerCharacter.CharacterGroup[_charaIndex];
+
+        EquipInfo _item = null;
+        int _index= -1;
+        for (int i = 0; i < inventory.Items.Length; i++)
+        {
+            if (inventory.Items[i].ID.EndsWith("0"))
+            {
+                _item = inventory.Items[i];
+                _index = i;
+                break;
+            }
+        }
+
+        if(_item == null)
+            return;
+
+        if (_item is WeaponInfo _weapon)
+            inventory.Items[_index] = _character.SwitchWeapon(_weapon);
+        else if (_item is WearInfo _wear)
+            inventory.Items[_index] = _character.SwitchWear(_wear);
 
         inventory.SortInventory();
     }

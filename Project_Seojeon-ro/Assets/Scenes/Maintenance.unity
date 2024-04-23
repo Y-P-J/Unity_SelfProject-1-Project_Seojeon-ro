@@ -2941,7 +2941,7 @@ MonoBehaviour:
   - {fileID: 1558535010}
   - {fileID: 2080113149}
   selectedCharaIndex: 0
-  equipImage:
+  equipImages:
   - {fileID: 1373094791786799760}
   - {fileID: 388163664}
   - {fileID: 271568058}

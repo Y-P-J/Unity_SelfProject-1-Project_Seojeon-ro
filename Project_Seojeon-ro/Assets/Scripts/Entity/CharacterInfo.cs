@@ -116,37 +116,38 @@ public class CharacterInfo : ScriptableObject
         return _temp;
     }
 
-    public WearInfo SwitchWear(WearInfo _wear)
+    public WearInfo SwitchWear(WearInfo _wear, bool _unEquip = false)
     {
         WearInfo _temp = null;
 
-        switch (_wear.WearType)
-        {
-            case WEAR_TYPE.HELMET:
-                _temp = helmet;
-                helmet = _wear;
-                break;
+        if (!_unEquip)
+            switch (_wear.WearType)
+            {
+                case WEAR_TYPE.HELMET:
+                    _temp = helmet;
+                    helmet = _wear;
+                    break;
 
-            case WEAR_TYPE.ARMOR:
-                _temp = armor;
-                armor = _wear;
-                break;
+                case WEAR_TYPE.ARMOR:
+                    _temp = armor;
+                    armor = _wear;
+                    break;
 
-            case WEAR_TYPE.GLOVES:
-                _temp = gloves;
-                gloves = _wear;
-                break;
+                case WEAR_TYPE.GLOVES:
+                    _temp = gloves;
+                    gloves = _wear;
+                    break;
 
-            case WEAR_TYPE.SHOES:
-                _temp = shoes;
-                shoes = _wear;
-                break;
+                case WEAR_TYPE.SHOES:
+                    _temp = shoes;
+                    shoes = _wear;
+                    break;
 
-            case WEAR_TYPE.RING:
-                _temp = ring;
-                ring = _wear;
-                break;
-        }
+                case WEAR_TYPE.RING:
+                    _temp = ring;
+                    ring = _wear;
+                    break;
+            }
 
         UpdateStatus();
 

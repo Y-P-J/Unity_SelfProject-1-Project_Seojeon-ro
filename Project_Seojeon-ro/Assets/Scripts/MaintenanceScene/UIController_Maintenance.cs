@@ -29,7 +29,7 @@ public class UIController_Maintenance : MonoBehaviour
 
     [Header("캐릭터 장비/스텟 정보")]
     [Tooltip("장착중인 장비 이미지")]//0:무기, 1:헬멧, 2:갑옷, 3:장갑, 4:신발, 5:반지
-    [SerializeField] Image[] equipImage;
+    [SerializeField] Image[] equipImages;
     [Tooltip("세부 스텟")]//0:레벨, 1:체력, 2:마력, 3:속도, 4:공격력, 5:방어력, 6:치명률, 7:회피율
     [SerializeField] TMP_Text[] detailStatusTexts;
 
@@ -83,6 +83,7 @@ public class UIController_Maintenance : MonoBehaviour
     GameObject lastSelect;
 
     #region 람다식 프로퍼티
+    public Image[] EquipImages => equipImages;
     public Image[] InventoryImages => inventoryImages;
     #endregion
 
@@ -96,20 +97,35 @@ public class UIController_Maintenance : MonoBehaviour
             List<RaycastResult> _ray = new List<RaycastResult>();
             EventSystem.current.RaycastAll(_event, _ray);
 
-            if (_ray[0].gameObject.name != "ItemIcon")
-                return;
-
-            for (int i = 0; i < inventoryImages.Length; i++)
+            if (_ray[0].gameObject.name == inventoryImages[0].gameObject.name)
             {
-                if (_ray[0].gameObject == inventoryImages[i].gameObject)
+                for (int i = 0; i < inventoryImages.Length; i++)
                 {
-                    GameProgressManager.Instance.SwitchItem(selectedCharaIndex, i);
-                    UpdateItemDescriptionUI(-1, false);
-                    UpdateCharaInfoUI();
-                    UpdateInventoryUI();
-                    break;
+                    if (_ray[0].gameObject == inventoryImages[i].gameObject)
+                    {
+                        GameProgressManager.Instance.SwitchItemForInven(selectedCharaIndex, i);
+                        UpdateItemDescriptionUI(-1, false);
+                        UpdateCharaInfoUI();
+                        UpdateInventoryUI();
+                        break;
+                    }
                 }
             }
+            else if (_ray[0].gameObject.name == equipImages[0].gameObject.name)
+            {
+                for(int i =0;i<equipImages.Length;i++)
+                {
+                    if (_ray[0].gameObject == equipImages[i].gameObject)
+                    {
+                        GameProgressManager.Instance.SwitchItemForEquip(selectedCharaIndex, i);
+                        UpdateItemDescriptionUI(-1, false);
+                        UpdateCharaInfoUI();
+                        UpdateInventoryUI();
+                        break;
+                    }
+                }
+            }
+
         }
     }
 
@@ -197,12 +213,12 @@ public class UIController_Maintenance : MonoBehaviour
             }
         }
 
-        equipImage[0].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Weapon.RepImage;
-        equipImage[1].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Helmet.RepImage;
-        equipImage[2].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Armor.RepImage;
-        equipImage[3].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Gloves.RepImage;
-        equipImage[4].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Shoes.RepImage;
-        equipImage[5].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Ring.RepImage;
+        equipImages[0].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Weapon.RepImage;
+        equipImages[1].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Helmet.RepImage;
+        equipImages[2].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Armor.RepImage;
+        equipImages[3].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Gloves.RepImage;
+        equipImages[4].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Shoes.RepImage;
+        equipImages[5].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Ring.RepImage;
 
         detailStatusTexts[0].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Level.ToString();
         detailStatusTexts[1].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FinalStatus.hp.ToString();
@@ -240,11 +256,16 @@ public class UIController_Maintenance : MonoBehaviour
     /// <summary>
     /// 아이템 설명 UI를 갱신하는 함수
     /// </summary>
-    public void UpdateItemDescriptionUI(int _index, bool _b)
+    public void UpdateItemDescriptionUI(int _index, bool _b, bool _isInven = true)
     {
         if (!_b)
+        {
             itemDescriptionUI.SetActive(false);
-        else
+
+            return;
+        }
+
+        if (_isInven)
         {
             RectTransform _description = itemDescriptionUI.GetComponent<RectTransform>();
             RectTransform _image = inventoryImages[_index].GetComponent<RectTransform>();
@@ -254,7 +275,7 @@ public class UIController_Maintenance : MonoBehaviour
                 _description.position = new Vector2(_inventory.position.x, _inventory.position.y - (_description.sizeDelta.y * 0.5f));
             else
                 _description.position = new Vector2(_inventory.position.x, _inventory.position.y + (_description.sizeDelta.y * 0.5f));
-            
+
             itemRepImage.sprite = GameProgressManager.Instance.Inventory.Items[_index].RepImage;
             itemNameText.text = GameProgressManager.Instance.Inventory.Items[_index].EquipName;
             if (GameProgressManager.Instance.Inventory.Items[_index] is WeaponInfo _weaponItem)
@@ -272,6 +293,10 @@ public class UIController_Maintenance : MonoBehaviour
             itemSpeedText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.speed.ToString();
 
             itemDescriptionUI.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("성공적인 호출");
         }
     }
 
