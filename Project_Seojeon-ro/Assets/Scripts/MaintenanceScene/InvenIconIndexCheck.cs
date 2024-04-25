@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 //아이템 아이콘의 인덱스를 체크하는 클래스
-public class InvenIconIndexCheck : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ItemIconIndexCheck : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     UIController_Maintenance uiController;
 

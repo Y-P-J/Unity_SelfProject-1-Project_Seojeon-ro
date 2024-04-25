@@ -3,7 +3,6 @@ using UnityEngine;
 
 //유니티 에디터에서 중복되는 Number를 가진 ScriptableObject를 검사하는 에디터들
 
-#if UNITY_EDITOR
 [CustomEditor(typeof(CharacterInfo))]
 public class CharacterInfoEditor : Editor
 {
@@ -133,4 +132,3 @@ public class GameInitInfoEditor : Editor
         }
     }
 }
-#endif

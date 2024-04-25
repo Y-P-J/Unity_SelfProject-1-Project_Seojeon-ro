@@ -50,9 +50,9 @@ MonoBehaviour:
     avoid: 0
   currentHp: 800
   currentMp: 600
-  firstSkill: {fileID: 11400000, guid: bf7885ec69815644ba49151d4c640d16, type: 2}
-  secondSkill: {fileID: 11400000, guid: bf7885ec69815644ba49151d4c640d16, type: 2}
-  thirdSkill: {fileID: 11400000, guid: bf7885ec69815644ba49151d4c640d16, type: 2}
+  firstSkill: {fileID: 11400000, guid: 7214861dc93ceea428718e7d07c43cc5, type: 2}
+  secondSkill: {fileID: 11400000, guid: 7214861dc93ceea428718e7d07c43cc5, type: 2}
+  thirdSkill: {fileID: 11400000, guid: 7214861dc93ceea428718e7d07c43cc5, type: 2}
   weapon: {fileID: 11400000, guid: 9d626678f85bfbf4baa23d8e02e56e53, type: 2}
   weaponTypes: 15000000
   helmet: {fileID: 11400000, guid: 9056c3f626afbe5418b48b18cea081c6, type: 2}

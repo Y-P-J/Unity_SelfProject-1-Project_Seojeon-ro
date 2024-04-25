@@ -60,7 +60,46 @@ public class GameProgressManager : Singleton<GameProgressManager>
         }
         else if (_item is WearInfo _wear)
         {
-            inventory.Items[_invenIndex] = _character.SwitchWear(_wear);
+            for(int i = 0; i < _character.HelmetTypes.Length; i++)
+            {
+                if (_character.HelmetTypes[i] == _wear.WearType)
+                {
+                    inventory.Items[_invenIndex] = _character.SwitchHelmet(_wear);
+                    break;
+                }
+            }
+            for(int i = 0; i < _character.ArmorTypes.Length; i++)
+            {
+                if (_character.ArmorTypes[i] == _wear.WearType)
+                {
+                    inventory.Items[_invenIndex] = _character.SwitchArmor(_wear);
+                    break;
+                }
+            }
+            for(int i = 0; i < _character.GloveTypes.Length; i++)
+            {
+                if (_character.GloveTypes[i] == _wear.WearType)
+                {
+                    inventory.Items[_invenIndex] = _character.SwitchGloves(_wear);
+                    break;
+                }
+            }
+            for(int i = 0; i < _character.ShoesTypes.Length; i++)
+            {
+                if (_character.ShoesTypes[i] == _wear.WearType)
+                {
+                    inventory.Items[_invenIndex] = _character.SwitchShoes(_wear);
+                    break;
+                }
+            }
+            for(int i = 0; i < _character.RingTypes.Length; i++)
+            {
+                if (_character.RingTypes[i] == _wear.WearType)
+                {
+                    inventory.Items[_invenIndex] = _character.SwitchRing(_wear);
+                    break;
+                }
+            }
         }
 
         inventory.SortInventory();
@@ -75,6 +114,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
 
         EquipInfo _item = null;
         int _index= -1;
+
         for (int i = 0; i < inventory.Items.Length; i++)
         {
             if (inventory.Items[i].ID.EndsWith("0"))
@@ -91,7 +131,26 @@ public class GameProgressManager : Singleton<GameProgressManager>
         if (_item is WeaponInfo _weapon)
             inventory.Items[_index] = _character.SwitchWeapon(_weapon);
         else if (_item is WearInfo _wear)
-            inventory.Items[_index] = _character.SwitchWear(_wear);
+        {
+            switch(_EquipIndex)
+            {
+                case 1:
+                    inventory.Items[_index] = _character.SwitchHelmet(_wear);
+                    break;
+                case 2:
+                    inventory.Items[_index] = _character.SwitchArmor(_wear);
+                    break;
+                case 3:
+                    inventory.Items[_index] = _character.SwitchGloves(_wear);
+                    break;
+                case 4:
+                    inventory.Items[_index] = _character.SwitchShoes(_wear);
+                    break;
+                case 5:
+                    inventory.Items[_index] = _character.SwitchRing(_wear);
+                    break;
+            }
+        }
 
         inventory.SortInventory();
     }

@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Security;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 //스텟을 나타내는 구조체

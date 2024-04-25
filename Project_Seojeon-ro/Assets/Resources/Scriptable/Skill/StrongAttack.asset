@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c218590d42dff0048b896b54640a6e3b, type: 3}
+  m_Name: StrongAttack
+  m_EditorClassIdentifier: 
+  skillName: "\uAC15\uD55C \uACF5\uACA9"
+  number: 1
+  id: SK0001
+  description: "\uAC15\uD558\uAC8C \uACF5\uACA9\uD574 [dmg]\uC758 \uD53C\uD574\uB97C
+    \uC785\uD78C\uB2E4."
+  descriptionForUI: "\uAC15\uD558\uAC8C \uACF5\uACA9\uD574 120(+1.1 \uACF5\uACA9\uB825)\uC758
+    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
+  damage: 120
+  attackScale: 1.1
+  mpCost: 20
+  cooldown: 1
+  repImage: {fileID: 21300000, guid: e30d7baabfb292c4f9687033f726d8a4, type: 3}

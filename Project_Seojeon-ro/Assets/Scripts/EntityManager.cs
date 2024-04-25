@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-//캐릭터와 장비의 정보를 담는 ScriptableObject를 로드하고 관리하는 클래스
+//캐릭터와 장비의 정보를 담는 ScriptableObject를 로드하고 보관, 관리하는 클래스
 public class EntityManager : Singleton<EntityManager>
 {
     [Tooltip("캐릭터 정보 딕셔너리")]
@@ -19,7 +19,6 @@ public class EntityManager : Singleton<EntityManager>
     [SerializeField, ReadOnly] protected SerializedDictionary<string, WearInfo> wearDict;
     [Tooltip("스킬 정보 딕셔너리")]
     [SerializeField, ReadOnly] protected SerializedDictionary<string, SkillInfo> skillDict;
-
     [Tooltip("게임 시작 정보 딕셔너리")]
     [SerializeField, ReadOnly] protected SerializedDictionary<string, GameInitInfo> gameInitDict;
 
@@ -31,14 +30,12 @@ public class EntityManager : Singleton<EntityManager>
         weaponDict = new SerializedDictionary<string, WeaponInfo>();
         wearDict = new SerializedDictionary<string, WearInfo>();
         skillDict = new SerializedDictionary<string, SkillInfo>();
-
         gameInitDict = new SerializedDictionary<string, GameInitInfo>();
 
         LoadCharacterData();
         LoadWeaponData();
         LoadWearData();
         LoadSkillData();
-
         LoadGameInitInfoData();
     }
 
@@ -53,7 +50,7 @@ public class EntityManager : Singleton<EntityManager>
         {
             foreach (CharacterInfo _chara in _characterInfo)
             {
-                if (characterDict.ContainsKey(_chara.ID))
+                if (characterDict.ContainsKey(_chara.ID))//ID가 중복되는 ScriptableObject가 있는지 확인
                 {
                     LogHandler.WriteLog(_chara.CharacterName + "의 ID가 중복됩니다.", this.GetType().Name, LogType.Error, true);
                 }
@@ -63,6 +60,7 @@ public class EntityManager : Singleton<EntityManager>
                 }
             }
 
+            //기본적으로 딕셔너리를 정렬할 필요는 없으나, 순회를 해야할 경우를 대비, 그리고 에디터에서 편하게 보기 위해 정렬
             characterDict = new SerializedDictionary<string, CharacterInfo>(characterDict.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
         }
         else

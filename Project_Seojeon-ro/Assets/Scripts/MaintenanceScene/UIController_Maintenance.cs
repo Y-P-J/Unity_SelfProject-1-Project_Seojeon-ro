@@ -1,12 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using TMPro;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
 
 //메인테넌스 씬의 UI를 관리하는 클래스
 public class UIController_Maintenance : MonoBehaviour
@@ -60,11 +56,12 @@ public class UIController_Maintenance : MonoBehaviour
     [SerializeField] TMP_Text itemNameText;
     [Tooltip("아이템 타입 텍스트")]
     [SerializeField] TMP_Text itemTypeText;
+    [Tooltip("아이템 장착 가능여부 텍스트")]
+    [SerializeField] TMP_Text itemIsEquipText;
     [Tooltip("아이템 품질 텍스트")]
     [SerializeField] TMP_Text itemQuiltyText;
     [Tooltip("아이템 설명 텍스트")]
     [SerializeField] TMP_Text itemDescriptionText;
-
     [SerializeField] TMP_Text itemAttackText;
     [SerializeField] TMP_Text itemDefenseText;
     [SerializeField] TMP_Text itemCriticalText;
@@ -97,6 +94,9 @@ public class UIController_Maintenance : MonoBehaviour
             List<RaycastResult> _ray = new List<RaycastResult>();
             EventSystem.current.RaycastAll(_event, _ray);
 
+            if(_ray.Count == 0)
+                return;
+
             if (_ray[0].gameObject.name == inventoryImages[0].gameObject.name)
             {
                 for (int i = 0; i < inventoryImages.Length; i++)
@@ -113,7 +113,7 @@ public class UIController_Maintenance : MonoBehaviour
             }
             else if (_ray[0].gameObject.name == equipImages[0].gameObject.name)
             {
-                for(int i =0;i<equipImages.Length;i++)
+                for (int i = 0; i < equipImages.Length; i++)
                 {
                     if (_ray[0].gameObject == equipImages[i].gameObject)
                     {
@@ -125,7 +125,6 @@ public class UIController_Maintenance : MonoBehaviour
                     }
                 }
             }
-
         }
     }
 
@@ -213,29 +212,72 @@ public class UIController_Maintenance : MonoBehaviour
             }
         }
 
-        equipImages[0].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Weapon.RepImage;
-        equipImages[1].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Helmet.RepImage;
-        equipImages[2].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Armor.RepImage;
-        equipImages[3].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Gloves.RepImage;
-        equipImages[4].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Shoes.RepImage;
-        equipImages[5].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Ring.RepImage;
+        CharacterInfo _chara = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex];
 
-        detailStatusTexts[0].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Level.ToString();
-        detailStatusTexts[1].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FinalStatus.hp.ToString();
-        detailStatusTexts[2].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FinalStatus.mp.ToString();
-        detailStatusTexts[3].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FinalStatus.speed.ToString();
-        detailStatusTexts[4].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FinalStatus.attack.ToString();
-        detailStatusTexts[5].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FinalStatus.defense.ToString();
-        detailStatusTexts[6].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FinalStatus.critical.ToString();
-        detailStatusTexts[7].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FinalStatus.avoid.ToString();
+        if (_chara.Weapon.ID.EndsWith("0"))
+            equipImages[0].gameObject.SetActive(false);
+        else
+        {
+            equipImages[0].sprite = _chara.Weapon.RepImage;
+            equipImages[0].gameObject.SetActive(true);
+        }
+
+        if(_chara.Helmet.ID.EndsWith("0"))
+            equipImages[1].gameObject.SetActive(false);
+        else
+        {
+            equipImages[1].sprite = _chara.Helmet.RepImage;
+            equipImages[1].gameObject.SetActive(true);
+        }
+
+        if (_chara.Armor.ID.EndsWith("0"))
+            equipImages[2].gameObject.SetActive(false);
+        else
+        {
+            equipImages[2].sprite = _chara.Armor.RepImage;
+            equipImages[2].gameObject.SetActive(true);
+        }
+
+        if (_chara.Gloves.ID.EndsWith("0"))
+            equipImages[3].gameObject.SetActive(false);
+        else
+        {
+            equipImages[3].sprite = _chara.Gloves.RepImage;
+            equipImages[3].gameObject.SetActive(true);
+        }
+
+        if (_chara.Shoes.ID.EndsWith("0"))
+            equipImages[4].gameObject.SetActive(false);
+        else
+        {
+            equipImages[4].sprite = _chara.Shoes.RepImage;
+            equipImages[4].gameObject.SetActive(true);
+        }
+
+        if (_chara.Ring.ID.EndsWith("0"))
+            equipImages[5].gameObject.SetActive(false);
+        else
+        {
+            equipImages[5].sprite = _chara.Ring.RepImage;
+            equipImages[5].gameObject.SetActive(true);
+        }
+
+        detailStatusTexts[0].text = _chara.Level.ToString();
+        detailStatusTexts[1].text = _chara.FinalStatus.hp.ToString();
+        detailStatusTexts[2].text = _chara.FinalStatus.mp.ToString();
+        detailStatusTexts[3].text = _chara.FinalStatus.speed.ToString();
+        detailStatusTexts[4].text = _chara.FinalStatus.attack.ToString();
+        detailStatusTexts[5].text = _chara.FinalStatus.defense.ToString();
+        detailStatusTexts[6].text = _chara.FinalStatus.critical.ToString();
+        detailStatusTexts[7].text = _chara.FinalStatus.avoid.ToString();
 
         for (int i = 0; i < skillImages.Length; i++)
         {
-            skillImages[i].sprite = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FirstSkill.RepImage;
-            skillNameTexts[i].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FirstSkill.SkillName;
-            skillDescriptionTexts[i].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FirstSkill.DescriptionForUI;
-            skillUseManaTexts[i].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FirstSkill.MpCost.ToString();
-            skillCooldownTexts[i].text = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].FirstSkill.Cooldown.ToString();
+            skillImages[i].sprite = _chara.FirstSkill.RepImage;
+            skillNameTexts[i].text = _chara.FirstSkill.SkillName;
+            skillDescriptionTexts[i].text = _chara.FirstSkill.DescriptionForUI;
+            skillUseManaTexts[i].text = _chara.FirstSkill.MpCost.ToString();
+            skillCooldownTexts[i].text = _chara.FirstSkill.Cooldown.ToString();
         }
     }
 
@@ -249,7 +291,10 @@ public class UIController_Maintenance : MonoBehaviour
             if (GameProgressManager.Instance.Inventory.Items[i].ID.EndsWith("0"))
                 inventoryImages[i].gameObject.SetActive(false);
             else
+            {
                 inventoryImages[i].sprite = GameProgressManager.Instance.Inventory.Items[i].RepImage;
+                inventoryImages[i].gameObject.SetActive(true);
+            }
         }
     }
 
@@ -265,9 +310,9 @@ public class UIController_Maintenance : MonoBehaviour
             return;
         }
 
+        RectTransform _description = itemDescriptionUI.GetComponent<RectTransform>();
         if (_isInven)
         {
-            RectTransform _description = itemDescriptionUI.GetComponent<RectTransform>();
             RectTransform _image = inventoryImages[_index].GetComponent<RectTransform>();
             RectTransform _inventory = inventoryUI.GetComponent<RectTransform>();
 
@@ -276,27 +321,128 @@ public class UIController_Maintenance : MonoBehaviour
             else
                 _description.position = new Vector2(_inventory.position.x, _inventory.position.y + (_description.sizeDelta.y * 0.5f));
 
-            itemRepImage.sprite = GameProgressManager.Instance.Inventory.Items[_index].RepImage;
-            itemNameText.text = GameProgressManager.Instance.Inventory.Items[_index].EquipName;
-            if (GameProgressManager.Instance.Inventory.Items[_index] is WeaponInfo _weaponItem)
+            EquipInfo _item = GameProgressManager.Instance.Inventory.Items[_index];
+
+            itemRepImage.sprite = _item.RepImage;
+            itemNameText.text = _item.EquipName;
+            itemIsEquipText.gameObject.SetActive(true);
+            if (_item is WeaponInfo _weaponItem)
+            {
                 itemTypeText.text = _weaponItem.WeaponTypeToString();
-            else if (GameProgressManager.Instance.Inventory.Items[_index] is WearInfo _wearItem)
+                for(int i = 0; i < GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].WeaponTypes.Length;i++)
+                {
+                    if (GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].WeaponTypes[i] == _weaponItem.WeaponType)
+                    {
+                        itemIsEquipText.gameObject.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            else if (_item is WearInfo _wearItem)
+            {
                 itemTypeText.text = _wearItem.WearTypeToString();
-            itemQuiltyText.text = GameProgressManager.Instance.Inventory.Items[_index].QualityToString();
-            itemDescriptionText.text = GameProgressManager.Instance.Inventory.Items[_index].Description;
-            itemAttackText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.attack.ToString();
-            itemDefenseText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.defense.ToString();
-            itemCriticalText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.critical.ToString();
-            itemAvoidText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.avoid.ToString();
-            itemHpText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.hp.ToString();
-            itemMpText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.mp.ToString();
-            itemSpeedText.text = GameProgressManager.Instance.Inventory.Items[_index].Status.speed.ToString();
+                for (int i = 0; i < GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].HelmetTypes.Length; i++)
+                {
+                    if (GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].HelmetTypes[i] == _wearItem.WearType)
+                    {
+                        itemIsEquipText.gameObject.SetActive(false);
+                        break;
+                    }
+                }
+                for (int i = 0; i < GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].ArmorTypes.Length; i++)
+                {
+                    if (GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].ArmorTypes[i] == _wearItem.WearType)
+                    {
+                        itemIsEquipText.gameObject.SetActive(false);
+                        break;
+                    }
+                }
+                for (int i = 0; i < GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].GloveTypes.Length; i++)
+                {
+                    if (GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].GloveTypes[i] == _wearItem.WearType)
+                    {
+                        itemIsEquipText.gameObject.SetActive(false);
+                        break;
+                    }
+                }
+                for (int i = 0; i < GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].ShoesTypes.Length; i++)
+                {
+                    if (GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].ShoesTypes[i] == _wearItem.WearType)
+                    {
+                        itemIsEquipText.gameObject.SetActive(false);
+                        break;
+                    }
+                }
+                for (int i = 0; i < GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].RingTypes.Length; i++)
+                {
+                    if (GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].RingTypes[i] == _wearItem.WearType)
+                    {
+                        itemIsEquipText.gameObject.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            itemQuiltyText.text = _item.QualityToString();
+            itemDescriptionText.text = _item.Description;
+            itemAttackText.text = _item.Status.attack.ToString();
+            itemDefenseText.text = _item.Status.defense.ToString();
+            itemCriticalText.text = _item.Status.critical.ToString();
+            itemAvoidText.text = _item.Status.avoid.ToString();
+            itemHpText.text = _item.Status.hp.ToString();
+            itemMpText.text = _item.Status.mp.ToString();
+            itemSpeedText.text = _item.Status.speed.ToString();
 
             itemDescriptionUI.SetActive(true);
         }
         else
         {
-            Debug.Log("성공적인 호출");
+            RectTransform _image = equipImages[_index].GetComponent<RectTransform>();
+            _description.position = new Vector2(_image.position.x + (_description.sizeDelta.x * 0.4f), _image.position.y - (_description.sizeDelta.y * 0.7f));
+
+            EquipInfo _item;
+
+            switch (_index)
+            {
+                case 0:
+                    _item = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Weapon;
+                    break;
+                case 1:
+                    _item = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Helmet;
+                    break;
+                case 2:
+                    _item = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Armor;
+                    break;
+                case 3:
+                    _item = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Gloves;
+                    break;
+                case 4:
+                    _item = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Shoes;
+                    break;
+                case 5:
+                    _item = GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].Ring;
+                    break;
+                default:
+                    return;
+            }
+
+            itemRepImage.sprite = _item.RepImage;
+            itemNameText.text = _item.EquipName;
+            if (_item is WeaponInfo _weaponItem)
+                itemTypeText.text = _weaponItem.WeaponTypeToString();
+            else if (_item is WearInfo _wearItem)
+                itemTypeText.text = _wearItem.WearTypeToString();
+            itemIsEquipText.gameObject.SetActive(false);
+            itemQuiltyText.text = _item.QualityToString();
+            itemDescriptionText.text = _item.Description;
+            itemAttackText.text = _item.Status.attack.ToString();
+            itemDefenseText.text = _item.Status.defense.ToString();
+            itemCriticalText.text = _item.Status.critical.ToString();
+            itemAvoidText.text = _item.Status.avoid.ToString();
+            itemHpText.text = _item.Status.hp.ToString();
+            itemMpText.text = _item.Status.mp.ToString();
+            itemSpeedText.text = _item.Status.speed.ToString();
+
+            itemDescriptionUI.SetActive(true);
         }
     }
 

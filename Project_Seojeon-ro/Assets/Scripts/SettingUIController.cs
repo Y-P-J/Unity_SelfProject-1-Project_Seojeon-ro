@@ -78,7 +78,7 @@ public class SettingUIController : MonoBehaviour
     /// </summary>
     public void FullScreenEnable()
     {
-        Screen.fullScreen = true;
+        GameManager.Instance.SetFullScreen(true);
     }
 
     /// <summary>
@@ -86,6 +86,6 @@ public class SettingUIController : MonoBehaviour
     /// </summary>
     public void FullScreenDisable()
     {
-        Screen.fullScreen = false;
+        GameManager.Instance.SetFullScreen(false);
     }
 }
