@@ -311,25 +311,32 @@ public class UIController_Maintenance : MonoBehaviour
         }
 
         RectTransform _description = itemDescriptionUI.GetComponent<RectTransform>();
+
         if (_isInven)
         {
-            RectTransform _image = inventoryImages[_index].GetComponent<RectTransform>();
-            RectTransform _inventory = inventoryUI.GetComponent<RectTransform>();
+            RectTransform _itemImage = inventoryImages[_index].GetComponent<RectTransform>();
+
+            _description.position = _itemImage.position;
 
             if (_index < 15)
-                _description.position = new Vector2(_inventory.position.x, _inventory.position.y - (_description.sizeDelta.y * 0.5f));
+                _description.anchoredPosition += new Vector2(0f, -_description.rect.height / 2f + -_itemImage.rect.height / 2f);
             else
-                _description.position = new Vector2(_inventory.position.x, _inventory.position.y + (_description.sizeDelta.y * 0.5f));
+                _description.anchoredPosition += new Vector2(0f, _description.rect.height / 2f + _itemImage.rect.height / 2f);
+
+            _description.anchoredPosition = new Vector2(
+                Mathf.Clamp(_description.anchoredPosition.x, -Screen.width / 2 + _description.rect.width / 2, Screen.width / 2 - _description.rect.width / 2),
+                _description.anchoredPosition.y);
 
             EquipInfo _item = GameProgressManager.Instance.Inventory.Items[_index];
 
             itemRepImage.sprite = _item.RepImage;
             itemNameText.text = _item.EquipName;
             itemIsEquipText.gameObject.SetActive(true);
+
             if (_item is WeaponInfo _weaponItem)
             {
                 itemTypeText.text = _weaponItem.WeaponTypeToString();
-                for(int i = 0; i < GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].WeaponTypes.Length;i++)
+                for (int i = 0; i < GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].WeaponTypes.Length; i++)
                 {
                     if (GameProgressManager.Instance.PlayerCharacter.CharacterGroup[selectedCharaIndex].WeaponTypes[i] == _weaponItem.WeaponType)
                     {
@@ -382,6 +389,7 @@ public class UIController_Maintenance : MonoBehaviour
                     }
                 }
             }
+
             itemQuiltyText.text = _item.QualityToString();
             itemDescriptionText.text = _item.Description;
             itemAttackText.text = _item.Status.attack.ToString();
@@ -397,7 +405,12 @@ public class UIController_Maintenance : MonoBehaviour
         else
         {
             RectTransform _image = equipImages[_index].GetComponent<RectTransform>();
-            _description.position = new Vector2(_image.position.x + (_description.sizeDelta.x * 0.4f), _image.position.y - (_description.sizeDelta.y * 0.7f));
+
+            _description.position = _image.position;
+            _description.anchoredPosition += new Vector2(0f, -_description.rect.height / 2f + -_image.rect.height / 2f);
+            _description.anchoredPosition = new Vector2(
+                Mathf.Clamp(_description.anchoredPosition.x, -Screen.width / 2 + _description.rect.width / 2, Screen.width / 2 - _description.rect.width / 2),
+                _description.anchoredPosition.y);
 
             EquipInfo _item;
 

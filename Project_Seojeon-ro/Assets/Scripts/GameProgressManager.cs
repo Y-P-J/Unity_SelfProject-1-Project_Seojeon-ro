@@ -39,6 +39,8 @@ public class GameProgressManager : Singleton<GameProgressManager>
         inventory.Setup();
     }
 
+
+
     /// <summary>
     /// 인벤토리에서 아이템을 교환하는 함수
     /// </summary>
@@ -49,7 +51,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
 
         if (_item is WeaponInfo _weapon)
         {
-            for(int i = 0; i < _character.WeaponTypes.Length; i++)
+            for (int i = 0; i < _character.WeaponTypes.Length; i++)
             {
                 if (_character.WeaponTypes[i] == _weapon.WeaponType)
                 {
@@ -60,7 +62,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
         }
         else if (_item is WearInfo _wear)
         {
-            for(int i = 0; i < _character.HelmetTypes.Length; i++)
+            for (int i = 0; i < _character.HelmetTypes.Length; i++)
             {
                 if (_character.HelmetTypes[i] == _wear.WearType)
                 {
@@ -68,7 +70,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
                     break;
                 }
             }
-            for(int i = 0; i < _character.ArmorTypes.Length; i++)
+            for (int i = 0; i < _character.ArmorTypes.Length; i++)
             {
                 if (_character.ArmorTypes[i] == _wear.WearType)
                 {
@@ -76,7 +78,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
                     break;
                 }
             }
-            for(int i = 0; i < _character.GloveTypes.Length; i++)
+            for (int i = 0; i < _character.GloveTypes.Length; i++)
             {
                 if (_character.GloveTypes[i] == _wear.WearType)
                 {
@@ -84,7 +86,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
                     break;
                 }
             }
-            for(int i = 0; i < _character.ShoesTypes.Length; i++)
+            for (int i = 0; i < _character.ShoesTypes.Length; i++)
             {
                 if (_character.ShoesTypes[i] == _wear.WearType)
                 {
@@ -92,7 +94,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
                     break;
                 }
             }
-            for(int i = 0; i < _character.RingTypes.Length; i++)
+            for (int i = 0; i < _character.RingTypes.Length; i++)
             {
                 if (_character.RingTypes[i] == _wear.WearType)
                 {
@@ -112,44 +114,40 @@ public class GameProgressManager : Singleton<GameProgressManager>
     {
         CharacterInfo _character = playerCharacter.CharacterGroup[_charaIndex];
 
-        EquipInfo _item = null;
-        int _index= -1;
+        int _index = -1;
 
         for (int i = 0; i < inventory.Items.Length; i++)
         {
             if (inventory.Items[i].ID.EndsWith("0"))
             {
-                _item = inventory.Items[i];
                 _index = i;
                 break;
             }
         }
 
-        if(_item == null)
+        if (_index == -1)
             return;
 
-        if (_item is WeaponInfo _weapon)
-            inventory.Items[_index] = _character.SwitchWeapon(_weapon);
-        else if (_item is WearInfo _wear)
+        switch (_EquipIndex)
         {
-            switch(_EquipIndex)
-            {
-                case 1:
-                    inventory.Items[_index] = _character.SwitchHelmet(_wear);
-                    break;
-                case 2:
-                    inventory.Items[_index] = _character.SwitchArmor(_wear);
-                    break;
-                case 3:
-                    inventory.Items[_index] = _character.SwitchGloves(_wear);
-                    break;
-                case 4:
-                    inventory.Items[_index] = _character.SwitchShoes(_wear);
-                    break;
-                case 5:
-                    inventory.Items[_index] = _character.SwitchRing(_wear);
-                    break;
-            }
+            case 0:
+                inventory.Items[_index] = _character.SwitchWeapon(EntityManager.Instance.CopyEntityByID<WeaponInfo>("WP0000000000"));
+                break;
+            case 1:
+                inventory.Items[_index] = _character.SwitchHelmet(EntityManager.Instance.CopyEntityByID<WearInfo>("WE0000000000"));
+                break;
+            case 2:
+                inventory.Items[_index] = _character.SwitchArmor(EntityManager.Instance.CopyEntityByID<WearInfo>("WE0000000000"));
+                break;
+            case 3:
+                inventory.Items[_index] = _character.SwitchGloves(EntityManager.Instance.CopyEntityByID<WearInfo>("WE0000000000"));
+                break;
+            case 4:
+                inventory.Items[_index] = _character.SwitchShoes(EntityManager.Instance.CopyEntityByID<WearInfo>("WE0000000000"));
+                break;
+            case 5:
+                inventory.Items[_index] = _character.SwitchRing(EntityManager.Instance.CopyEntityByID<WearInfo>("WE0000000000"));
+                break;
         }
 
         inventory.SortInventory();
